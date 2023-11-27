@@ -86,12 +86,15 @@ values and include measurement uncertainty. The outdoor variables will be reques
 request to the API of the server at ```192.168.6.153/readings```. The local values are stored in a CSV database locally 
 and a backup copy will be store in the remote server using the **Weather API**. 
 
+
 ## Record Of Tasks
 
 
 ## Test Plan
 
+
 # Criteria C: Development
+
 
 ## Existing Tools
 
