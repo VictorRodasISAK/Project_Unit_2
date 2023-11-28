@@ -32,4 +32,12 @@ def read_ardruino():
         data = ardruino.readline()
     return data.decode("utf-8")
 
+def save_localy(data, file_name = "data.csv"):
+    with open(file_name, "r") as f:
+        file = f.readlines()
+    file.append(data)
+    with open(file_name, "w") as f:
+        f.writelines(file)
+
+
     
