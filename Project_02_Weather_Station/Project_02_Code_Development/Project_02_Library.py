@@ -81,6 +81,13 @@ def create_new_sensor(name, type, location, ip = "192.168.6.153"):
 def formate_data(data):
     return data.strip("\n").split(",")
     
+def get_my_sensor(id):
+    sensors = get_my_sensors()
+    sensor = []
+    for s in sensors:
+        if s["sensor_id"] == id:
+            sensor.append(s["value"])
+    return sensor
 
 
 # d1, d2, d3 = read_ardruino()
@@ -91,8 +98,11 @@ def formate_data(data):
 # save_localy(Project_02_CSV_Files=d2, file_name="Project_02_CSV_Files/Project_02_CSV_S2.csv")
 # save_localy(Project_02_CSV_Files=d3, file_name="Project_02_CSV_Files/Project_02_CSV_S3.csv")ú
 
-#new_record(d1[1], sensor_id=24)
+# new_record(d1[1], sensor_id=24)
 
+# sen = create_new_sensor("trying", "Temperature", "Bedroom")
+# new_record(20, sen)
+# print(get_my_sensor(sen))
 
-new_record(28, sensor_id=24)
-print(get_my_sensors())
+# new_record(21, sen)
+# print(get_my_sensor(sen))
