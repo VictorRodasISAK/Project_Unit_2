@@ -12,9 +12,9 @@ def main():
     s3h = create_new_sensor("s3", "Humidity", "room")
     for _ in range(576):
         d1, d2, d3 = read_ardruino()
-        save_localy(d1, "s1.csv")
-        save_localy(d2, "s2.csv")
-        save_localy(d3, "s3.csv")
+        save_localy(data=d1, file_name="s1.csv")
+        save_localy(data=d2, file_name="s2.csv")
+        save_localy(data=d3, file_name="s3.csv")
 
         new_record(d1[0], sensor_id=s1t)
         new_record(d1[1], sensor_id=s1h)
