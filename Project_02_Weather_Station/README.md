@@ -5,6 +5,9 @@
 **Fig.1:** *Weather GIF* [^1]
 
 
+[^1]: Giphy, McLovin. “Search All the Gifs &amp; Make Your Own Animated Gif.” GIPHY, 2013, giphy.com/trending-gifs. Accessed 30 Nov. 2023. 
+
+
 # Criteria A: Planning
 
 
