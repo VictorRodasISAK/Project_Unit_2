@@ -28,7 +28,7 @@ Considering the budgetary constraints of the client and the hardware requirement
 this solution is Python. Python's open-source nature and platform independence contribute to the long-term viability of 
 the system. The use of Python simplifies potential future enhancements or modifications, allowing for seamless scalability 
 without the need for extensive redevelopment [^6][^7]. In comparison to the alternative C or C++, which share similar 
-features, Python is a High level programming language (HLL) with high abstraction [^8]. For example, memory management 
+features, Python is a High level programming language (HL) with high abstraction [^8]. For example, memory management 
 is automatic in Python whereas it is responsibility of the C/C++ developer to allocate and free up memory [^8], this 
 could result in faster applications but also memory problems. In addition, a HLL language will allow me and future 
 developers extend the solution or solve issues promptly.
@@ -88,10 +88,23 @@ and a backup copy will be store in the remote server using the **Weather API**.
 
 
 ## Record Of Tasks
-
+| Task No. | Planned Action                           | Planned Outcome                                                                              | Time estimate | Target completion date | Criteria |
+|----------|------------------------------------------|----------------------------------------------------------------------------------------------|---------------|------------------------|----------|
+| 1        | Take information from Dr. Ruben's GitHub | To have the proposed solution, success criteria and the system diagram                       | 15 min        | Nov 25                 | A, B     |
+| 2        | Working on the problem definition        | To have a general view on what do we need to work on                                         | 10 min        | Nov 26                 | A        |
+| 3        | Making a shared repository on GitHub     | To have all the information updated                                                          | 10 min        | Nov 27                 | B        |
+| 4        | Working on the code for 1 sensor         | To make sure that the sensors are working in a good way                                      | 30 min        | Nov 28                 | C        |
+| 5        | Working on the functions for the code    | To have every function in one python code, therefore the main code is going to be more clear | 3 hours       | Nov 29                 | C        |
+| 6        | Working on the code for 3 sensors        | To make sure that we can get the data in a clear way                                         | 1 hour        | Nov 30                 | C        |
+| 7        | Making the connections between sensors   | To have the idea of the connections that we need to make and get the results expected        | 45 min        | Nov 30                 | C        |
 
 ## Test Plan
-
+| Test No. | Type of Test                                               | Procedure                                                                                                    | Expected Outcome                                                                   | Date   |
+|----------|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|--------|
+| 1        | Testing the Arduino code for 1 sensor                      | Upload the code to the Arduino, then use PyCharm code to print the data that we are getting from the sensor  | Data presented in the format Humidity:XX.XX% Temperature:XX.XX°C                   | Nov 28 |
+| 2        | Testing the Arduino code for 2 sensors                     | Upload the code to the Arduino, then use PyCharm code to print the data from the 2 sensors                   | Data presented in the format Humidity:XX.XX% Temperature:XX.XX°C in both sensors   | Nov 29 |
+| 3        | Testing the Arduino code for 3 sensors                     | Upload the code to the Arduino, then use PyCharm code to print the data from the 3 sensors                   | Data presented in the format Humidity:XX.XX% Temperature:XX.XX°C in the 3 sensors  | Nov 30 |
+| 4        | Running the PyCharm code to save the data in the CSV Files | Run the code in PyCharm and after getting the data, saving the values of the sensors separately in CSV files | Every CSV file with humidity in the first line, and temperature in the second line | Dec 01 |
 
 # Criteria C: Development
 
