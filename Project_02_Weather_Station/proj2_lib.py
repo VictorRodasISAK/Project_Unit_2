@@ -1,5 +1,7 @@
 import requests
 import serial
+from pyfirmata import Arduino
+import pyfirmata
 
 def smoothing(x, smoothing_win = 5, overlap = 1):
     smooth_x = []
@@ -26,6 +28,12 @@ def get_my_sensor(sensor_id = 12, ip = "192.168.6.153"):
     return sen.json()
 
 def read_ardruino():
+    board = Arduino('COM5')
+    print("Communication Successfully started")
+
+    data = pyfirmata.util.Iterator(board)
+    data.start()
+
     ardruino = serial.Serial(port="COM6", baudrate=9600, timeout=0.1)
     data = ""
     while len(data) < 1:
@@ -34,12 +42,16 @@ def read_ardruino():
 
 def save_localy(data, file_name = "data.csv"):
     with open(file_name, "r") as f:
-        file = f.readlines()
-    file.append(data)
+        temp = f.readline()
+        hum = f.readline()
+    t, h = data
+    temp = temp + "," + t
+    hum = hum + "," + h
     with open(file_name, "w") as f:
-        f.writelines(file)
+        f.writelines(temp)
+        f.writelines(hum)
 
-def get_school_sensor(id, ip = "192.168.6.153"):
+def get_server_sensor(id, ip = "192.168.6.153"):
     ans = requests.get(f"http://{ip}/readings")
     data = ans.json()
 
