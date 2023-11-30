@@ -106,3 +106,4 @@ def get_my_sensor(id):
 
 # new_record(21, sen)
 # print(get_my_sensor(sen))
+# save_localy(data=["20","19"], file_name="Project_02_Weather_Station/Project_02_CSV_Files/Project_02_CSV_S1.csv")
