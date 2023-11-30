@@ -16,33 +16,48 @@ def login_to_server(ip = "192.168.6.153", user = {"username": "Jenda", "password
     cookie = ans.json()["access_token"]
     return {"Authorization": f"Bearer {cookie}"} 
 
-def new_record(value, sensor_id = 12, ip = "192.168.6.153"):
+def new_record(value, sensor_id, ip = "192.168.6.153"):
     headers = login_to_server()
-    record = {"sensor_id": 12, "value": 28}
+    record = {"sensor_id": sensor_id, "value": value}
     ans = requests.post(f"http://{ip}/reading/new", json=record, headers=headers)
+    print(ans.json())
 
-def get_my_sensor(sensor_id = 12, ip = "192.168.6.153"):
+def get_my_sensors(ip = "192.168.6.153"):
     headers = login_to_server()
-    sen = requests.get(f"http://{ip}/sensors", headers=headers)
+    sen = requests.get(f"http://{ip}/user/readings", headers=headers)
     return sen.json()
 
 def read_ardruino():
-    ardruino = serial.Serial(port="COM6", baudrate=9600, timeout=0.1)
-    data = ""
-    while len(data) < 1:
-        data = ardruino.readline()
-    return data.decode("utf-8")
+    ardruino = serial.Serial(port="COM5", baudrate=9600, timeout=0.1)
+    d1 = ""
+    while len(d1) < 1:
+        d1 = ardruino.readline()
+    d2 = ""
+    while len(d2) < 1:
+        d2 = ardruino.readline()
+    d3 = ""
+    while len(d3) < 1:
+        d3 = ardruino.readline()
+    d1 = d1.decode("utf-8")
+    d2 = d2.decode("utf-8")
+    d3 = d3.decode("utf-8")
+
+    d1 = d1.strip("\r\n").split(",")
+    d2 = d2.strip("\r\n").split(",")
+    d3 = d3.strip("\r\n").split(",")
+    return d1, d2, d3
 
 def save_localy(data, file_name = "data.csv"):
     with open(file_name, "r") as f:
-        temp = f.readline()
-        hum = f.readline()
-    t, h = data
-    temp = temp + "," + t
-    hum = hum + "," + h
+        humidity = f.readline().strip("\n")
+        temperature = f.readline().strip("\n")
+    h, t = data
+    humidity = humidity + "," + h
+    temperature = temperature + "," + t
     with open(file_name, "w") as f:
-        f.writelines(temp)
-        f.writelines(hum)
+        f.writelines(humidity)
+        f.writelines("\n")
+        f.writelines(temperature)
 
 def get_server_sensor(id, ip = "192.168.6.153"):
     ans = requests.get(f"http://{ip}/readings")
@@ -63,8 +78,21 @@ def create_new_sensor(name, type, location, ip = "192.168.6.153"):
     json = ans.json()
     return json["id"]
     
+def formate_data(data):
+    return data.strip("\n").split(",")
+    
 
-d1, d2, d3 = read_ardruino()
-save_localy(data=d1, file_name="s1.csv")
-save_localy(data=d2, file_name="s2.csv")
-save_localy(data=d3, file_name="s3.csv")
+
+# d1, d2, d3 = read_ardruino()
+# print(d1)
+# print(d2)
+# print(d3)
+# save_localy(data=d1, file_name="data/s1.csv")
+# save_localy(data=d2, file_name="data/s2.csv")
+# save_localy(data=d3, file_name="data/s3.csv")ú
+
+#new_record(d1[1], sensor_id=24)
+
+
+new_record(28, sensor_id=24)
+print(get_my_sensors())
