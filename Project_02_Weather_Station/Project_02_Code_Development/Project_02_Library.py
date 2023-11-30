@@ -47,7 +47,7 @@ def read_ardruino():
     d3 = d3.strip("\r\n").split(",")
     return d1, d2, d3
 
-def save_localy(data, file_name = "data.csv"):
+def save_localy(data, file_name = "Project_02_CSV_Files.csv"):
     with open(file_name, "r") as f:
         humidity = f.readline().strip("\n")
         temperature = f.readline().strip("\n")
@@ -87,9 +87,9 @@ def formate_data(data):
 # print(d1)
 # print(d2)
 # print(d3)
-# save_localy(data=d1, file_name="data/s1.csv")
-# save_localy(data=d2, file_name="data/s2.csv")
-# save_localy(data=d3, file_name="data/s3.csv")ú
+# save_localy(Project_02_CSV_Files=d1, file_name="Project_02_CSV_Files/Project_02_CSV_S1.csv")
+# save_localy(Project_02_CSV_Files=d2, file_name="Project_02_CSV_Files/Project_02_CSV_S2.csv")
+# save_localy(Project_02_CSV_Files=d3, file_name="Project_02_CSV_Files/Project_02_CSV_S3.csv")ú
 
 #new_record(d1[1], sensor_id=24)
 
