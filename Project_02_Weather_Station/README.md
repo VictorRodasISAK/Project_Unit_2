@@ -100,6 +100,7 @@ and a backup copy will be store in the remote server using the **Weather API**.
 | 5        | Working on the functions for the code    | To have every function in one python code, therefore the main code is going to be more clear | 3 hours       | Nov 29                 | C        |
 | 6        | Working on the code for 3 sensors        | To make sure that we can get the data in a clear way                                         | 1 hour        | Nov 30                 | C        |
 | 7        | Making the connections between sensors   | To have the idea of the connections that we need to make and get the results expected        | 45 min        | Nov 30                 | C        |
+| 8        | Setting the sensors in the room          | To get the data from 3 different points in the room to get conclusions from the room         | 30 min        | Dec 1                  | C, B     |
 
 ## Test Plan
 | Test No. | Type of Test                                               | Procedure                                                                                                    | Expected Outcome                                                                   | Date   |
@@ -108,6 +109,7 @@ and a backup copy will be store in the remote server using the **Weather API**.
 | 2        | Testing the Arduino code for 2 sensors                     | Upload the code to the Arduino, then use PyCharm code to print the data from the 2 sensors                   | Data presented in the format Humidity:XX.XX% Temperature:XX.XX°C in both sensors   | Nov 29 |
 | 3        | Testing the Arduino code for 3 sensors                     | Upload the code to the Arduino, then use PyCharm code to print the data from the 3 sensors                   | Data presented in the format Humidity:XX.XX% Temperature:XX.XX°C in the 3 sensors  | Nov 30 |
 | 4        | Running the PyCharm code to save the data in the CSV Files | Run the code in PyCharm and after getting the data, saving the values of the sensors separately in CSV files | Every CSV file with humidity in the first line, and temperature in the second line | Dec 01 |
+| 5        | Testing cron for getting the data                          | Configure cron in the computer to run the code every 5 minutes for 48 hours                                  | Getting the data from every 5 minutes. Everything saved in the CSV files           | Dec 02 |
 
 # Criteria C: Development
 
