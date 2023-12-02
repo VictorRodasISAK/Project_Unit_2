@@ -1,7 +1,11 @@
 #collects Project_02_CSV_Files from local arduino connected to 3 sensors and saves it to local file and to server
-
+#Sensor3 Near the room heater
+#Sensor2 Near the window
+#Sensor1 Near the door
 from Project_02_Library import *
 import time
+
+
 
 def do_measurement(s1t, s2t, s3t, s1h, s2h, s3h):
     d1, d2, d3 = read_ardruino()
