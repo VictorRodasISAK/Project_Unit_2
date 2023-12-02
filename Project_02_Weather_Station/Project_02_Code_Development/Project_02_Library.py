@@ -1,6 +1,9 @@
 import requests
 import serial
 
+#Sensor3 Near the room heater
+#Sensor2 Near the window
+#Sensor1 Near the door
 
 def smoothing(x, smoothing_win = 5, overlap = 1):
     smooth_x = []
