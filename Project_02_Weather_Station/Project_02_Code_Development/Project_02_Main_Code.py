@@ -17,12 +17,12 @@ def do_measurement(s1t, s2t, s3t, s1h, s2h, s3h):
     new_record(d3[0], sensor_id=s3h)
 
 def create_all_sensors():
-    s1t = create_new_sensor("s1", "Temperature", "room")
-    s2t = create_new_sensor("s2", "Temperature", "room")
-    s3t = create_new_sensor("s3", "Temperature", "room")
-    s1h = create_new_sensor("s1", "Humidity", "room")
-    s2h = create_new_sensor("s2", "Humidity", "room")
-    s3h = create_new_sensor("s3", "Humidity", "room")
+    s1t = create_new_sensor("s1t", "Temperature", "room")
+    s2t = create_new_sensor("s2t", "Temperature", "room")
+    s3t = create_new_sensor("s3t", "Temperature", "room")
+    s1h = create_new_sensor("s1h", "Humidity", "room")
+    s2h = create_new_sensor("s2h", "Humidity", "room")
+    s3h = create_new_sensor("s3h", "Humidity", "room")
     print(s1t, s2t, s3t, s1h, s2h, s3h)
     return s1t, s2t, s3t, s1h, s2h, s3h
 
@@ -32,4 +32,4 @@ def main():
         do_measurement(s1t, s2t, s3t, s1h, s2h, s3h)
         time.sleep(300)
 
-    
+do_measurement(40, 41, 42, 43, 44, 45)
