@@ -1,7 +1,7 @@
 import requests
 import serial
 
-#Sensor3 Near the room heater
+#Sensor3 Near the room heater (breadboard)
 #Sensor2 Near the window
 #Sensor1 Near the door
 
