@@ -13,7 +13,9 @@ Victor & Jenda are buying a house in Japan, but they are worried about the humid
 Now the inquiry is even bigger because winter is coming, therefore they want to keep the humidity and temperature
 stable in the house. They started to measure this values, but they notice it takes too much time. For this reason,
 they want to get a device and a costume data script that is low-cost, and it can measure the humidity and temperature in 
-the house in an efficient way, where the data collected is tidy, and it's easy to get a clear idea of what the rooms need.
+the house in an efficient way, where the data collected is tidy, and it's easy to get a clear idea of what the house need.
+Moreover, if possible they are asking for a pre-visualization of temperature and humidity for the next 12 hours, so they
+can set up possible actions beforehand to keep this values in the best way possible.
 
 
 ## Problem Definition
@@ -66,8 +68,8 @@ developers extend the solution or solve issues promptly.
 ### Design Statement
 We will design and make a poster for Victor & Jenda.
 The poster will include the system diagram and visual representation and model of humidity in the house for 48 hours,
-and a prediction for the subsequent 12 hours. It will present the ideal objects that they need to buy to keep the temperature
-and humidity levels suitable to live in. This is achieved through with the software Python on a Arduino Uno, 
+and a prediction for the next 12 hours. It will present the ideal objects that they need to buy to keep the temperature
+and humidity levels suitable to live in. This is achieved through with the software Python on an Arduino Uno, 
 with three DHT11 sensors. It will take approximately 3 weeks to complete and will be evaluated according to criteria below
 
 ## Success Criteria
