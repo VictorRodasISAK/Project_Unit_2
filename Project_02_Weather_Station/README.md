@@ -9,6 +9,11 @@
 
 
 # Criteria A: Planning
+Victor & Jenda are buying a house in Japan, but they are worried about the humidity and temperate inside the house. 
+Now the inquiry is even bigger because winter is coming, therefore they want to keep the humidity and temperature
+stable in the house. They started to measure this values, but they notice it takes too much time. For this reason,
+they want to get a device and a costume data script that is low-cost, and it can measure the humidity and temperature in 
+the house in an efficient way, where the data collected is tidy, and it's easy to get a clear idea of what the rooms need.
 
 
 ## Problem Definition
@@ -59,7 +64,11 @@ developers extend the solution or solve issues promptly.
 
 
 ### Design Statement
-
+We will design and make a poster for Victor & Jenda.
+The poster will include the system diagram and visual representation and model of humidity in the house for 48 hours,
+and a prediction for the subsequent 12 hours. It will present the ideal objects that they need to buy to keep the temperature
+and humidity levels suitable to live in. This is achieved through with the software Python on a Arduino Uno, 
+with three DHT11 sensors. It will take approximately 3 weeks to complete and will be evaluated according to criteria below
 
 ## Success Criteria
 1. The solution provides a visual representation of the Humidity and Temperature values inside a dormitory (Local) and outside the house (Remote) for a period of minimum 48 hours. 
@@ -89,27 +98,42 @@ values and include measurement uncertainty. The outdoor variables will be reques
 request to the API of the server at ```192.168.6.153/readings```. The local values are stored in a CSV database locally 
 and a backup copy will be store in the remote server using the **Weather API**. 
 
+## Flow Diagrams
+
 
 ## Record Of Tasks
-| Task No. | Planned Action                           | Planned Outcome                                                                              | Time estimate | Target completion date | Criteria |
-|----------|------------------------------------------|----------------------------------------------------------------------------------------------|---------------|------------------------|----------|
-| 1        | Take information from Dr. Ruben's GitHub | To have the proposed solution, success criteria and the system diagram                       | 15 min        | Nov 25                 | A, B     |
-| 2        | Working on the problem definition        | To have a general view on what do we need to work on                                         | 10 min        | Nov 26                 | A        |
-| 3        | Making a shared repository on GitHub     | To have all the information updated                                                          | 10 min        | Nov 27                 | B        |
-| 4        | Working on the code for 1 sensor         | To make sure that the sensors are working in a good way                                      | 30 min        | Nov 28                 | C        |
-| 5        | Working on the functions for the code    | To have every function in one python code, therefore the main code is going to be more clear | 3 hours       | Nov 29                 | C        |
-| 6        | Working on the code for 3 sensors        | To make sure that we can get the data in a clear way                                         | 1 hour        | Nov 30                 | C        |
-| 7        | Making the connections between sensors   | To have the idea of the connections that we need to make and get the results expected        | 45 min        | Nov 30                 | C        |
-| 8        | Setting the sensors in the room          | To get the data from 3 different points in the room to get conclusions from the room         | 30 min        | Dec 1                  | C, B     |
+| Task No. | Planned Action                                               | Planned Outcome                                                                              | Time estimate | Target completion date | Criteria |
+|----------|--------------------------------------------------------------|----------------------------------------------------------------------------------------------|---------------|------------------------|----------|
+| 1        | Take information from Dr. Ruben's GitHub                     | To have the proposed solution, success criteria and the system diagram                       | 15 min        | Nov 25                 | A, B     |
+| 2        | Working on the problem definition                            | To have a general view on what do we need to work on                                         | 10 min        | Nov 26                 | A        |
+| 3        | Making a shared repository on GitHub                         | To have all the information updated                                                          | 10 min        | Nov 27                 | B        |
+| 4        | Working on the code for 1 sensor                             | To make sure that the sensors are working in a good way                                      | 30 min        | Nov 28                 | C        |
+| 5        | Working on the functions for the code                        | To have every function in one python code, therefore the main code is going to be more clear | 3 hours       | Nov 29                 | C        |
+| 6        | Working on the code for 3 sensors                            | To make sure that we can get the data in a clear way                                         | 1 hour        | Nov 30                 | C        |
+| 7        | Making the connections between sensors                       | To have the idea of the connections that we need to make and get the results expected        | 45 min        | Nov 30                 | C        |
+| 8        | Setting the sensors in the room                              | To get the data from 3 different points in the room to get conclusions from the room         | 30 min        | Dec 1                  | C, B     |
+| 9        | Using cron to set the action to run the code every 5 minutes | To have efficiency when collecting data                                                      | 1 hour        | Dec 2                  | C        |
+| 10       | Activating cron                                              | To start collecting the data for 48 hours                                                    | 15 min        | Dec 2                  | C        |
+| 11       | Working on the code for the graphs                           | Once finished the time to collect data, to start graphing the data                           | 3 hour        | Dec 3                  | C        |
+| 12       | Analyzing the data from the sensors                          | To verify if the information recorded is good                                                | 20 min        | Dec 4                  | C        |
+| 13       | Working on the graphs                                        | With the data recorded, we started making the graphs to show the data                        | 2 hours       | Dec 5                  | C        |
+| 14       | Working on the flow diagrams                                 | To have a clear view of how the code works                                                   | 1 hour        | Dec 6                  | B        |
+| 15       | Working on the flow diagrams                                 | To have an overview of the functions in the code                                             | 1 hour        | Dec 7                  | B        |
+
 
 ## Test Plan
-| Test No. | Type of Test                                               | Procedure                                                                                                    | Expected Outcome                                                                   | Date   |
-|----------|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|--------|
-| 1        | Testing the Arduino code for 1 sensor                      | Upload the code to the Arduino, then use PyCharm code to print the data that we are getting from the sensor  | Data presented in the format Humidity:XX.XX% Temperature:XX.XX°C                   | Nov 28 |
-| 2        | Testing the Arduino code for 2 sensors                     | Upload the code to the Arduino, then use PyCharm code to print the data from the 2 sensors                   | Data presented in the format Humidity:XX.XX% Temperature:XX.XX°C in both sensors   | Nov 29 |
-| 3        | Testing the Arduino code for 3 sensors                     | Upload the code to the Arduino, then use PyCharm code to print the data from the 3 sensors                   | Data presented in the format Humidity:XX.XX% Temperature:XX.XX°C in the 3 sensors  | Nov 30 |
-| 4        | Running the PyCharm code to save the data in the CSV Files | Run the code in PyCharm and after getting the data, saving the values of the sensors separately in CSV files | Every CSV file with humidity in the first line, and temperature in the second line | Dec 01 |
-| 5        | Testing cron for getting the data                          | Configure cron in the computer to run the code every 5 minutes for 48 hours                                  | Getting the data from every 5 minutes. Everything saved in the CSV files           | Dec 02 |
+| Test No. | Type of Test                                                            | Procedure                                                                                                    | Expected Outcome                                                                              | Date   |
+|----------|-------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|--------|
+| 1        | Testing the Arduino code for 1 sensor                                   | Upload the code to the Arduino, then use PyCharm code to print the data that we are getting from the sensor  | Data presented in the format Humidity:XX.XX% Temperature:XX.XX°C                              | Nov 28 |
+| 2        | Testing the Arduino code for 2 sensors                                  | Upload the code to the Arduino, then use PyCharm code to print the data from the 2 sensors                   | Data presented in the format Humidity:XX.XX% Temperature:XX.XX°C in both sensors              | Nov 29 |
+| 3        | Testing the Arduino code for 3 sensors                                  | Upload the code to the Arduino, then use PyCharm code to print the data from the 3 sensors                   | Data presented in the format Humidity:XX.XX% Temperature:XX.XX°C in the 3 sensors             | Nov 30 |
+| 4        | Running the PyCharm code to save the data in the CSV Files              | Run the code in PyCharm and after getting the data, saving the values of the sensors separately in CSV files | Every CSV file with humidity in the first line, and temperature in the second line            | Dec 01 |
+| 5        | Testing cron for getting the data                                       | Configure cron in the computer to run the code.                                                              | Getting the data. Everything saved in the CSV files                                           | Dec 02 |
+| 6        | Testing the new arduino code to make easier the way to collect the data | Upload the code to the Arduino, then running the code with PyCharm to get the data in the new format         | Getting the data just separated by ',' and the data of each sensor in its respective CSV file | Dec 02 |
+| 7        | Testing if the code works properly, together with cron                  | By activating the cron setting, watching if it works for the next 20 min                                     | Getting the data as expected, separated by ','                                                | Dec 02 |
+| 8        | Testing the code for the graphs                                         | With the data collected to the moment, measuring if the functions for the graphs work                        | Getting a proper graph showing humidity and temperature                                       | Dec 03 |
+| 9        | Testing the code for the graphs                                         | With the final results of the data collected, measuring if the code works without problems                   | Getting the graph of all the values recorded of humidity and temperature                      | Dec 05 |
+
 
 # Criteria C: Development
 
