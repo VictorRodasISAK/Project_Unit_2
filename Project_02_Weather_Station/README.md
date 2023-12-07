@@ -107,7 +107,7 @@ and a backup copy will be store in the remote server using the **Weather API**.
 | Task No. | Planned Action                                               | Planned Outcome                                                                              | Time estimate | Target completion date | Criteria |
 |----------|--------------------------------------------------------------|----------------------------------------------------------------------------------------------|---------------|------------------------|----------|
 | 1        | Take information from Dr. Ruben's GitHub                     | To have the proposed solution, success criteria and the system diagram                       | 15 min        | Nov 25                 | A, B     |
-| 2        | Working on the problem definition                            | To have a general view on what do we need to work on                                         | 10 min        | Nov 26                 | A        |
+| 2        | Working on the problem definition and design statement       | To have a general view on what do we need to work on                                         | 30 min        | Nov 26                 | A        |
 | 3        | Making a shared repository on GitHub                         | To have all the information updated                                                          | 10 min        | Nov 27                 | B        |
 | 4        | Working on the code for 1 sensor                             | To make sure that the sensors are working in a good way                                      | 30 min        | Nov 28                 | C        |
 | 5        | Working on the functions for the code                        | To have every function in one python code, therefore the main code is going to be more clear | 3 hours       | Nov 29                 | C        |
@@ -121,7 +121,6 @@ and a backup copy will be store in the remote server using the **Weather API**.
 | 13       | Working on the graphs                                        | With the data recorded, we started making the graphs to show the data                        | 2 hours       | Dec 5                  | C        |
 | 14       | Working on the flow diagrams                                 | To have a clear view of how the code works                                                   | 1 hour        | Dec 6                  | B        |
 | 15       | Working on the flow diagrams                                 | To have an overview of the functions in the code                                             | 1 hour        | Dec 7                  | B        |
-
 
 ## Test Plan
 | Test No. | Type of Test                                                            | Procedure                                                                                                    | Expected Outcome                                                                              | Date   |

@@ -39,12 +39,12 @@ for s in range(len(sensors_data["s1h"])):
 # plot the data
 plt.subplot(2, 1, 1)
 plt.plot(time, mean_temp)
-plt.ylabel("Temperature")   
+plt.ylabel("Temperature (°C)")
 plt.xlabel("Time")
 plt.title("Temperature and Humidity in the room")
 plt.subplot(2, 1, 2)
 plt.plot(time, mean_hum)
-plt.ylabel("Humidity")
+plt.ylabel("Humidity (%)")
 plt.xlabel("Time")
 plt.show()
 
@@ -55,7 +55,7 @@ plt.subplot(3, 1, 2)
 plt.plot(time, sensors_data["s2h"], label="s2h")
 plt.subplot(3, 1, 3)
 plt.plot(time, sensors_data["s3h"], label="s3h")
-plt.ylabel("Humidity")
+plt.ylabel("Humidity (%)")
 plt.xlabel("Time")
 plt.show()
 
