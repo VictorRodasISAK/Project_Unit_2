@@ -31,7 +31,7 @@ def get_my_sensors(ip = "192.168.6.153"):
     return sen.json()
 
 def read_ardruino():
-    ardruino = serial.Serial(port="COM5", baudrate=9600, timeout=0.1)
+    ardruino = serial.Serial(port="/dev/cu.usbserial-1410", baudrate=9600, timeout=0.1)
     d1 = ""
     while len(d1) < 1:
         d1 = ardruino.readline()

@@ -9,9 +9,9 @@ import time
 
 def do_measurement(s1t, s2t, s3t, s1h, s2h, s3h):
     d1, d2, d3 = read_ardruino()
-    save_localy(data=d1, file_name="Project_02_Weather_Station/Project_02_CSV_Files/Project_02_CSV_S1.csv")
-    save_localy(data=d2, file_name="Project_02_Weather_Station/Project_02_CSV_Files/Project_02_CSV_S2.csv")
-    save_localy(data=d3, file_name="Project_02_Weather_Station/Project_02_CSV_Files/Project_02_CSV_S3.csv")
+    save_localy(data=d1, file_name="/Users/m19-056/PycharmProjects/pythonProject1/Project_Unit_2/Project_02_Weather_Station/Project_02_CSV_Files/Project_02_CSV_S1.csv")
+    save_localy(data=d2, file_name="/Users/m19-056/PycharmProjects/pythonProject1/Project_Unit_2/Project_02_Weather_Station/Project_02_CSV_Files/Project_02_CSV_S2.csv")
+    save_localy(data=d3, file_name="/Users/m19-056/PycharmProjects/pythonProject1/Project_Unit_2/Project_02_Weather_Station/Project_02_CSV_Files/Project_02_CSV_S3.csv")
 
     new_record(d1[1], sensor_id=s1t)
     new_record(d1[0], sensor_id=s1h)
