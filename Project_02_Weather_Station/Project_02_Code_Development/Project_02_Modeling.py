@@ -64,7 +64,7 @@ def plot_avg_temp_hum():
     plt.xlim(time[0], time[-1])
     plt.gcf().autofmt_xdate()
     plt.show()
-plot_avg_temp_hum()
+
 
 # plot humidity sensor data
 def get_indoor_humidity_data():
@@ -79,5 +79,27 @@ def get_indoor_humidity_data():
     plt.plot(t, s3smooth, label="s3h")
     plt.ylabel("Humidity")
     plt.xlabel("Time")
+
+    plt.xlim(time[0], time[-1])
+    plt.gcf().autofmt_xdate()
     plt.show()
+
+# New function to plot average temperature with error bars every 30 data points and minimum and maximum
+def plot_avg_temp_with_error():
+    plt.errorbar(time[::30], mean_temp[::30], yerr=std_temp[::30], fmt='o', ecolor='green', capsize=3)
+    plt.fill_between(time, min_temp, max_temp, alpha=0.2, label="min/max")
+    plt.plot(time, mean_temp, label="avg")
+    plt.ylabel("Temperature")
+    plt.xlabel("Time")
+    plt.title("Average Temperature with Error Bars")
+
+    plt.xlim(time[0], time[-1])
+    plt.gcf().autofmt_xdate()
+    plt.show()
+
+plot_avg_temp_with_error()
+
+
+
+
 
