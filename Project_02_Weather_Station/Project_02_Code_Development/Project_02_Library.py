@@ -109,7 +109,7 @@ def get_my_sensor(id):
 
 
 # new_record(21, sen)
-#for i in [40, 41, 42, 43, 44, 45]:
-    #print(get_my_sensor(i))
+# for i in [40, 41, 42, 43, 44, 45]:
+#     print(get_my_sensor(i))
 # print(get_my_sensors())
 # save_localy(data=["20","19"], file_name="Project_02_Weather_Station/Project_02_CSV_Files/Project_02_CSV_S1.csv")

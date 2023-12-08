@@ -31,7 +31,7 @@ def create_all_sensors():
     return s1t, s2t, s3t, s1h, s2h, s3h
 
 def main():
-    for _ in range(576):
+    for _ in range(576):    
         do_measurement(40, 41, 42, 43, 44, 45)
         time.sleep(300)
 
