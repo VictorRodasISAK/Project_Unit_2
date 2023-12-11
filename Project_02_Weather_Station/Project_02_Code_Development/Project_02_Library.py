@@ -15,7 +15,6 @@ def smoothing(x, smoothing_win = 5, overlap = 1):
 
 def login_to_server(ip = "192.168.6.153", user = {"username": "Jenda", "password": "stoikForPres"}):
     ans = requests.post(f"http://{ip}/login", json=user)
-    #print(ans.json())
     cookie = ans.json()["access_token"]
     return {"Authorization": f"Bearer {cookie}"} 
 
@@ -23,7 +22,6 @@ def new_record(value, sensor_id, ip = "192.168.6.153"):
     headers = login_to_server()
     record = {"sensor_id": sensor_id, "value": value}
     ans = requests.post(f"http://{ip}/reading/new", json=record, headers=headers)
-    print(ans.json())
 
 def get_my_sensors(ip = "192.168.6.153"):
     headers = login_to_server()
@@ -31,16 +29,16 @@ def get_my_sensors(ip = "192.168.6.153"):
     return sen.json()
 
 def read_ardruino():
-    ardruino = serial.Serial(port="/dev/cu.usbserial-1410", baudrate=9600, timeout=0.1)
+    arduino = serial.Serial(port="/dev/cu.usbserial-1410", baudrate=9600, timeout=0.1)
     d1 = ""
     while len(d1) < 1:
-        d1 = ardruino.readline()
+        d1 = arduino.readline()
     d2 = ""
     while len(d2) < 1:
-        d2 = ardruino.readline()
+        d2 = arduino.readline()
     d3 = ""
     while len(d3) < 1:
-        d3 = ardruino.readline()
+        d3 = arduino.readline()
     d1 = d1.decode("utf-8")
     d2 = d2.decode("utf-8")
     d3 = d3.decode("utf-8")
