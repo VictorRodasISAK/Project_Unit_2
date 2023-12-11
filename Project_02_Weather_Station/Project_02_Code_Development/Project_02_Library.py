@@ -60,7 +60,7 @@ def save_localy(data, file_name = "Project_02_CSV_Files.csv"):
         f.writelines("\n")
         f.writelines(temperature)
 
-def get_server_sensor(id, ip = "192.168.6.153"):
+def get_server_sensor_values(id, ip = "192.168.6.153"):
     ans = requests.get(f"http://{ip}/readings")
     data = ans.json()
 
@@ -69,6 +69,17 @@ def get_server_sensor(id, ip = "192.168.6.153"):
     for s in sensors:
         if s["sensor_id"] == id:
             sensor.append(s["value"])
+    return sensor
+
+def get_server_sensor(id, ip = "192.168.6.153"):
+    ans = requests.get(f"http://{ip}/readings")
+    data = ans.json()
+
+    sensors = data["readings"][0]
+    sensor = []
+    for s in sensors:
+        if s["sensor_id"] == id:
+            sensor.append(s)
     return sensor
     
 def create_new_sensor(name, type, location, ip = "192.168.6.153"):

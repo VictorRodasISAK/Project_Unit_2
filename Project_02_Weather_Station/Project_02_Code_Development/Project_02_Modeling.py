@@ -66,7 +66,7 @@ def plot_avg_temp_hum():
     plt.xlim(time[0], time[-1])
     plt.gcf().autofmt_xdate()
     plt.show()
-plot_avg_temp_hum()
+# plot_avg_temp_hum()
 
 # plot humidity sensor data
 def get_indoor_humidity_data():
@@ -176,4 +176,85 @@ def visulise_tempreture():
 
 # visulise_tempreture()
 
+def get_data_from_date(yr, month, day, records):
+    """
+    because in 2.12. the weather was 7 degrees in a day and 1 degree in a night
+    we use data from 20.11 where the weather was 8 degree in a day and 2 degree in a night
+    wich is by far the most similar to the 2.12. data from our options from 17.11. to 21.11. and 7.12. onwards
+    """
+    date = datetime.datetime(yr, month, day).date()
+    data = []
+    for r in records:
+        d = r["datetime"]
+        datetime_object = datetime.datetime.strptime(d, '%Y-%m-%dT%H:%M:%S.%f')
+        if datetime_object.date() == date:
 
+            data.append(r)
+    return data
+
+def plot_outdoor_temp(yr, month, day1, day2):
+    """
+    takes temp from two days form server ids 0, 2, 4
+    plots their average and datetime on x axis
+    """
+    sen1 = get_server_sensor(0)
+    sen2 = get_server_sensor(2)
+    sen3 = get_server_sensor(4)
+    print("got sensors")
+
+    data1 = get_data_from_date(yr, month, day1, sen1)
+    data1 += get_data_from_date(yr, month, day2, sen1)
+    print("got data 1")
+    data2 = get_data_from_date(yr, month, day1, sen2)
+    data2 += get_data_from_date(yr, month, day2, sen2)
+    print("got data 2")
+    data3 = get_data_from_date(yr, month, day1, sen3)
+    data3 += get_data_from_date(yr, month, day2, sen3)
+    print("got data 3")
+
+    temp = []
+    time = []
+    y1 = []
+    y2 = []
+    y3 = []
+
+    for a, b, c in zip(data1, data2, data3):
+        y1.append(a["value"])
+        y2.append(b["value"])
+        y3.append(c["value"])
+        temp.append(np.mean([y1, y2, y3]))
+        time.append(datetime.datetime.strptime(a["datetime"], '%Y-%m-%dT%H:%M:%S.%f'))
+
+    print(time[0], time[-1])
+
+    # Plot the data using visulise_tempreture() function
+    plt.style.use('ggplot')
+
+    fig = plt.figure(figsize=(10, 5))
+    grid = plt.GridSpec(3, 4, figure=fig)
+    ax1 = fig.add_subplot(grid[0:3, 0:3])
+    ax1.set_xlim(time[0], time[-1])
+    plt.gcf().autofmt_xdate()
+    plt.ylabel("Temperature (C)")
+    plt.xlabel("Time")
+    ax1.plot(time, temp, label="avg", color='blue')
+    ax2 = fig.add_subplot(grid[0, 3])
+    ax2.set_xlim(time[0], time[-1])
+    ax2.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gcf().autofmt_xdate()
+    ax2.plot(time, y1, label="s1t", color='red')
+    ax3 = fig.add_subplot(grid[1, 3])
+    ax3.set_xlim(time[0], time[-1])
+    ax3.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gcf().autofmt_xdate()
+    ax3.plot(time, y2, label="s2t", color='green')
+    ax4 = fig.add_subplot(grid[2, 3])
+    ax4.set_xlim(time[0], time[-1])
+    ax4.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gcf().autofmt_xdate()
+    ax4.plot(time, y3, label="s3t", color='orange')
+    plt.show()
+    
+    
+        
+plot_outdoor_temp(2023, 11, 19, 20)
