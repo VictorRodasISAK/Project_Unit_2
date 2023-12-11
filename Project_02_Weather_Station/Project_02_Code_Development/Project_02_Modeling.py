@@ -53,12 +53,12 @@ def plot_avg_temp_hum():
     plt.subplot(2, 1, 1)
     # plt.errorbar(time, mean_temp, yerr=std_temp, fmt='o', ecolor='green', capsize=3)
     plt.plot(time, mean_temp, label="avg")
-    plt.fill_between(time, min_temp, max_temp, alpha= 0.2, label="min/max")
+    # plt.fill_between(time, min_temp, max_temp, alpha= 0.2, label="min/max")
     plt.ylabel("Temperature (C)")   
     plt.xlabel("Time")
     plt.title("Temperature and Humidity in the room")
     plt.subplot(2, 1, 2)
-    plt.errorbar(time, mean_hum, yerr=std_hum, fmt='o', ecolor='green', capsize=3)
+    # plt.errorbar(time, mean_hum, yerr=std_hum, fmt='o', ecolor='green', capsize=3)
     plt.plot(time, mean_hum, label="avg")
     plt.ylabel("Humidity (%)")
     plt.xlabel("Time")
@@ -99,7 +99,7 @@ def plot_avg_temp_with_error():
     plt.gcf().autofmt_xdate()
     plt.show()
 
-plot_avg_temp_with_error()
+# plot_avg_temp_with_error()
 
 def qudratic_model(x, a, b, c):
     return a*x**2 + b*x + c
@@ -143,7 +143,7 @@ def plot_regression_model(model):
     plt.gcf().autofmt_xdate()
     plt.show()
 
-plot_regression_model(polynomial_model)
+# plot_regression_model(polynomial_model)
 
 
 def visulise_tempreture():
@@ -174,6 +174,6 @@ def visulise_tempreture():
     ax4.plot(time, sensors_data["s3t"], label="s3t", color='orange')
     plt.show()
 
-visulise_tempreture()
+# visulise_tempreture()
 
 
