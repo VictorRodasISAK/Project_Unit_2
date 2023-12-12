@@ -104,24 +104,28 @@ and a backup copy will be store in the remote server using the **Weather API**.
 
 
 ## Record Of Tasks
-| Task No. | Planned Action                                               | Planned Outcome                                              | Time estimate | Target completion date | Criteria |
-| -------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------- | ---------------------- | -------- |
-| 1        | Take information from Dr. Ruben's GitHub                     | To have the proposed solution, success criteria and the system diagram | 15 min        | Nov 25                 | A, B     |
-| 2        | Working on the problem definition and design statement       | To have a general view on what do we need to work on         | 30 min        | Nov 26                 | A        |
-| 3        | Making a shared repository on GitHub                         | To have all the information updated                          | 10 min        | Nov 27                 | B        |
-| 4        | Working on the code for 1 sensor                             | To make sure that the sensors are working in a good way      | 30 min        | Nov 28                 | C        |
-| 5        | Working on the functions for the code                        | To have every function in one python code, therefore the main code is going to be more clear | 3 hours       | Nov 29                 | C        |
-| 6        | Working on the code for 3 sensors                            | To make sure that we can get the data in a clear way         | 1 hour        | Nov 30                 | C        |
-| 7        | Making the connections between sensors                       | To have the idea of the connections that we need to make and get the results expected | 45 min        | Nov 30                 | C        |
-| 8        | Setting the sensors in the room                              | To get the data from 3 different points in the room to get conclusions from the room | 30 min        | Dec 1                  | C, B     |
-| 9        | Using cron to set the action to run the code every 5 minutes | To have efficiency when collecting data                      | 1 hour        | Dec 2                  | C        |
-| 10       | Activating cron                                              | To start collecting the data for 48 hours                    | 15 min        | Dec 2                  | C        |
-| 11       | Working on the code for the graphs                           | Once finished the time to collect data, to start graphing the data | 3 hour        | Dec 3                  | C        |
-| 12       | Analyzing the data from the sensors                          | To verify if the information recorded is good                | 20 min        | Dec 4                  | C        |
-| 13       | Working on the graphs                                        | With the data recorded, we started making the graphs to show the data | 2 hours       | Dec 5                  | C        |
-| 14       | Working on the flow diagrams                                 | To have a clear view of how the code works                   | 1 hour        | Dec 6                  | B        |
-| 15       | Working on the flow diagrams                                 | To have an overview of the functions in the code             | 1 hour        | Dec 7                  | B        |
-| 16       | Working on the graphs                                        | To get data from the server of the outdoor sensors to graph them | 1 Hour        | Dec 10                 | C        |
+| Task No. | Planned Action                                               | Planned Outcome                                                                                 | Time estimate | Target completion date | Criteria |
+|----------|--------------------------------------------------------------|-------------------------------------------------------------------------------------------------|---------------|------------------------|----------|
+| 1        | Take information from Dr. Ruben's GitHub                     | To have the proposed solution, success criteria and the system diagram                          | 15 min        | Nov 25                 | A, B     |
+| 2        | Working on the problem definition and design statement       | To have a general view on what do we need to work on                                            | 30 min        | Nov 26                 | A        |
+| 3        | Making a shared repository on GitHub                         | To have all the information updated                                                             | 10 min        | Nov 27                 | B        |
+| 4        | Working on the code for 1 sensor                             | To make sure that the sensors are working in a good way                                         | 30 min        | Nov 28                 | C        |
+| 5        | Working on the functions for the code                        | To have every function in one python code, therefore the main code is going to be more clear    | 3 hours       | Nov 29                 | C        |
+| 6        | Working on the code for 3 sensors                            | To make sure that we can get the data in a clear way                                            | 1 hour        | Nov 30                 | C        |
+| 7        | Making the connections between sensors                       | To have the idea of the connections that we need to make and get the results expected           | 45 min        | Nov 30                 | C        |
+| 8        | Setting the sensors in the room                              | To get the data from 3 different points in the room to get conclusions from the room            | 30 min        | Dec 1                  | C, B     |
+| 9        | Using cron to set the action to run the code every 5 minutes | To have efficiency when collecting data                                                         | 1 hour        | Dec 2                  | C        |
+| 10       | Activating cron                                              | To start collecting the data for 48 hours                                                       | 15 min        | Dec 2                  | C        |
+| 11       | Working on the code for the graphs                           | Once finished the time to collect data, to start graphing the data                              | 3 hour        | Dec 3                  | C        |
+| 12       | Analyzing the data from the sensors                          | To verify if the information recorded is good                                                   | 20 min        | Dec 4                  | C        |
+| 13       | Working on the graphs                                        | With the data recorded, we started making the graphs to show the data                           | 2 hours       | Dec 5                  | C        |
+| 14       | Working on the flow diagrams                                 | To have a clear view of how the code works                                                      | 1 hour        | Dec 6                  | B        |
+| 15       | Working on the flow diagrams                                 | To have an overview of the functions in the code                                                | 1 hour        | Dec 7                  | B        |
+| 16       | Working on the documentation                                 | To have the record of our project                                                               | 1 hour        | Dec 8                  | A, B     |
+| 17       | Upgrading the graphs                                         | To have a better view of the graphs, therefore the it shows proper data that can be read easily | 2 hours       | Dec 9                  | C        |
+| 18       | Designing the poster                                         | To know which type of graphs and information do we need for the poster                          | 30 min        | Dec 10                 | B        |
+| 19       | Video outline                                                | To know which information do we need to include on the video                                    | 20 min        | Dec 11                 | B        |
+| 20       | Working on the documentation                                 | To have the complete track of our project                                                       | 1 hour        | Dec 12                 | A, B     |
 
 ## Test Plan
 
@@ -136,13 +140,18 @@ and a backup copy will be store in the remote server using the **Weather API**.
 | 7        | Testing if the code works properly, together with cron                  | By activating the cron setting, watching if it works for the next 20 min                                     | Getting the data as expected, separated by ','                                                | Dec 02 |
 | 8        | Testing the code for the graphs                                         | With the data collected to the moment, measuring if the functions for the graphs work                        | Getting a proper graph showing humidity and temperature                                       | Dec 03 |
 | 9        | Testing the code for the graphs                                         | With the final results of the data collected, measuring if the code works without problems                   | Getting the graph of all the values recorded of humidity and temperature                      | Dec 05 |
-
+| 10       | Testing the upgrade for the graphs                                      | With the baseline of the code for the graphs we can add more stuff                                           | Having the data presented in a better way                                                     | Dec 09 |
 
 # Criteria C: Development
 
 
 ## Existing Tools
-
+| Software/Development Tool |
+|---------------------------|
+| Python (PyCharm)          |
+| VS Code                   |
+| Terminal                  |
+| Crontab                   |
 
 ## List Of Techniques Used
 
