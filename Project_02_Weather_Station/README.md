@@ -266,6 +266,122 @@ def get_data_from_date(yr, month, day, sensor):
 You can notice that we used datetime library to handle the date comparison. That solves the problem of different formating of dates and for human hard to read format used by server and allows easier graphing later.
 
 ***Visualisation of data:***
+To adress the fourth success criteria, we wanted to visualise different sensors, their average, standard deviation, minimum, maximum so it is easy to read and compare. We also wanted to visualise the data from the remote location and compare them to the local ones.
+
+We decided to use matplotlib library, which allows us to do all of that and is therefore an excellent choice for this project. Using matplotlib, we can easily graph the data we got earlier as discussed in the previous section and with the help of numpy library we can easily calculate the average, standard deviation, minimum and maximum of the data.
+
+Here is an example of how we graphed the average temperature data from the local sensors with minimum and maximum values as well as the error bars every 30 values to make it easier to read:
+```python
+def plot_avg_temp_with_error(min_temp: list, max_temp: list, mean_temp: list, std_temp: list, time: list):
+    plt.errorbar(time[::30], mean_temp[::30], yerr=std_temp[::30], fmt='o', ecolor='green', capsize=3)
+    plt.fill_between(time, min_temp, max_temp, alpha=0.2, label="min/max")
+    plt.plot(time, mean_temp, label="avg")
+    plt.ylabel("Temperature (C)")
+    plt.xlabel("Time")
+    plt.title("Average Temperature with Error Bars")
+
+    plt.xlim(time[0], time[-1])
+    plt.gcf().autofmt_xdate()
+    plt.show()
+```
+Here is graph created by this function:
+![temperature with error bars](Project_02_Images/temperature_with_error_bars.png)
+
+When we were trying to do the same for the humidity, we realised that the data we got from the sensors were not correct. We were getting values jumping from 20 to 35 sometimes to 40 and back. We wanted to understand the reason for that, so we decided to graph the data we got from the sensors without any changes for all three sensors. We thought that maybe one of the sensors is broken and we wanted to find out which one.
+So we created a function ```visualise_humidity``` which graphs all three sensors and average humidity with the same y-axis. The code is the following:  
+```python
+def visulise_humidity():
+    plt.style.use('ggplot')
+
+    fig = plt.figure(figsize=(10, 5))
+    grid = plt.GridSpec(3, 4, figure=fig)
+    ax1 = fig.add_subplot(grid[0:3, 0:3])
+    ax1.set_xlim(time[0], time[-1]) # Set xlim to the first and last value of time
+    ax1.set_ylim(0, 60)  # Set ylim to 0-60
+    plt.gcf().autofmt_xdate() # Rotate xticks
+    plt.ylabel("Humidity (%)")
+    plt.xlabel("Time")
+    plt.title("Humidity in the room")
+    ax1.plot(time, mean_hum, label="avg", color='blue')
+    ax2 = fig.add_subplot(grid[0, 3])
+    ax2.set_xlim(time[0], time[-1])
+    ax2.set_ylim(0, 60)  
+    ax2.xaxis.set_major_locator(plt.MaxNLocator(4)) # Set number of xticks to 4
+    plt.gcf().autofmt_xdate() 
+    ax2.plot(time, sensors_data["s1h"], label="s1h", color='red')
+    ax3 = fig.add_subplot(grid[1, 3])
+    ax3.set_xlim(time[0], time[-1])
+    ax3.set_ylim(0, 60)  
+    ax3.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gcf().autofmt_xdate()
+    ax3.plot(time, sensors_data["s2h"], label="s2h", color='green')
+    ax4 = fig.add_subplot(grid[2, 3])
+    ax4.set_xlim(time[0], time[-1])
+    ax4.set_ylim(0, 60)  
+    ax4.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gcf().autofmt_xdate()
+    ax4.plot(time, sensors_data["s3h"], label="s3h", color='orange')
+    
+    ax1.legend() # Add legend to graph
+    ax2.legend()
+    ax3.legend()
+    ax4.legend()
+    
+    plt.show()
+```
+You can notice a lot of formatings of the graph, which are there to make the graph easier to read. Those small details such as rotation of dates on x-axis, setting the number of xticks, setting the same y-axis for all graphs, setting the same xlim and ylim for all graphs are crutial when it comes to reading the graph and understanding the data.
+
+Here is the graph created by this function:
+![visualisation of idnoor humidity sensors](Project_02_Images/humidity_for_all_sen.png)
+
+This graph helped us understand that the humidity in the room is too low for sensors to measure. They all jump up and down from 20 degrees which is the minimum humidity they can measure. This is the reason why we were getting incorrect data from the sensors. It showed us that our original hypothesis with broken sensor was wrong.
+
+It made clear that the data from those sensors are not reliable and we decided to not use them in the rest of the project. We decided to use only the temperature data from the local sensors and the temperature and humidity data from the remote location.
+
+### Mathematical Modelling
+To adress the sixth success criteria, we had to create a mathematical model to predict its values for the next 12 hours. We were not sure whitch model to use, so we decided to create a function that allows us to easily compare different models and choose the best one.
+It looks like this:
+```python
+def plot_regression_model(model):
+    plt.style.use('ggplot')
+
+    # Fit the regression model
+    popt, pcov = curve_fit(model, time_in_min, mean_temp)
+
+    # Generate x values for the regression line
+    x = np.linspace(time_in_min[0], time_in_min[-1] + 12*60, 1000)
+
+    # Generate y values using the fitted parameters
+    y = model(x, *popt)
+
+    # Plot the average temperature data
+    plt.plot(time_in_min, mean_temp, label="Average Temperature")
+
+    # Plot the regression model
+    plt.plot(x, y, label="Regression Model")
+
+    plt.ylabel("Temperature (C)")
+    plt.xlabel("Time)")
+    plt.title("Regression Model for Average Temperature")
+    plt.legend()
+
+    plt.xlim(time_in_min[0], time_in_min[-1])
+
+    plt.xticks(ticks=[x[t] for t in range(120, len(x), 120)], labels=[(origin + datetime.timedelta(minutes=x[t])).strftime("%d %b %H:%M") for t in range(120, len(x), 120)])  # Display x-axis ticks in day, month, and hour format
+    plt.gcf().autofmt_xdate()
+    
+    plt.show()
+```
+It takes as an argument the model we want to use. It fits the model to the data we got from the sensors and graphs it together with the data. It also sets the xticks to be every 2 hours, so it is easier to read the graph. It shows the extra 12 hours, so we can see the prediction of the model.
+
+Here is an example of this function with Polynomial Regression model of degree 3:
+![polynomial regression model](Project_02_Images/polynomial_regression_model.png)
+
+If we run the same function with Linear Regression model, we get the following graph:
+![linear regression model](Project_02_Images/linear_regression_model.png)
+
+Quadratic Regression model is the following:
+![quadratic regression model](Project_02_Images/quadratic_regression_model.png)
 
 
 

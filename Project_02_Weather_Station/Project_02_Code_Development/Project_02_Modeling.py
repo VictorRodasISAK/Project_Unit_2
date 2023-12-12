@@ -9,8 +9,18 @@ sensors_id = {"s1t": 40, "s2t": 41, "s3t": 42, "s1h": 43, "s2h": 44, "s3h": 45}
 
 # Get the data from the server
 sensors_data = {}
-for s in sensors_id:
-    sensors_data[s] = [float(x) for x in get_my_sensor(sensors_id[s])]
+# for s in sensors_id:
+#     sensors_data[s] = [float(x) for x in get_my_sensor(sensors_id[s])]
+
+with open(r"C:\Users\jenda\OneDrive\programing\isak\Project_Unit_2\Project_02_Weather_Station\Project_02_CSV_Files\Project_02_CSV_S1.csv", "r") as f:
+    sensors_data["s1h"] = [float(x) for x in f.readline().split(",")[1:]]
+    sensors_data["s1t"] = [float(x) for x in f.readline().split(",")[1:]]
+with open(r"C:\Users\jenda\OneDrive\programing\isak\Project_Unit_2\Project_02_Weather_Station\Project_02_CSV_Files\Project_02_CSV_S2.csv", "r") as f:
+    sensors_data["s2h"] = [float(x) for x in f.readline().split(",")[1:]]
+    sensors_data["s2t"] = [float(x) for x in f.readline().split(",")[1:]]
+with open(r"C:\Users\jenda\OneDrive\programing\isak\Project_Unit_2\Project_02_Weather_Station\Project_02_CSV_Files\Project_02_CSV_S3.csv", "r") as f:
+    sensors_data["s3h"] = [float(x) for x in f.readline().split(",")[1:]]
+    sensors_data["s3t"] = [float(x) for x in f.readline().split(",")[1:]]
 
 print("got my data")
 
@@ -88,16 +98,18 @@ def get_indoor_humidity_data():
     plt.xlim(time[0], time[-1])
     plt.gcf().autofmt_xdate()
     plt.show()
+# get_indoor_humidity_data()
 
 # New function to plot average temperature with error bars every 30 data points and minimum and maximum
 def plot_avg_temp_with_error():
-    plt.errorbar(time[::30], mean_temp[::30], yerr=std_temp[::30], fmt='o', ecolor='green', capsize=3)
+    plt.errorbar(time[::30], mean_temp[::30], yerr=std_temp[::30], fmt='o', ecolor='green', capsize=3, label="std")
     plt.fill_between(time, min_temp, max_temp, alpha=0.2, label="min/max")
     plt.plot(time, mean_temp, label="avg")
     plt.ylabel("Temperature (C)")
     plt.xlabel("Time")
     plt.title("Average Temperature with Error Bars")
 
+    plt.legend()
     plt.xlim(time[0], time[-1])
     plt.gcf().autofmt_xdate()
     plt.show()
@@ -120,11 +132,13 @@ def logist_model(x, a, b, c, d):
     return a/(1 + np.exp(-c*(x - d))) + b
 
 def plot_regression_model(model):
+    plt.style.use('ggplot')
+
     # Fit the regression model
     popt, pcov = curve_fit(model, time_in_min, mean_temp)
 
     # Generate x values for the regression line
-    x = np.linspace(time_in_min[0], time_in_min[-1], 1000)
+    x = np.linspace(time_in_min[0], time_in_min[-1] + 12*60, 1000)
 
     # Generate y values using the fitted parameters
     y = model(x, *popt)
@@ -142,11 +156,12 @@ def plot_regression_model(model):
 
     plt.xlim(time_in_min[0], time_in_min[-1])
 
-    plt.xticks(ticks=[time_in_min[x] for x in range(60, len(time_in_min), 60)], labels=[origin + datetime.timedelta(minutes=time_in_min[x]) for x in range(60, len(time_in_min), 60)])  # Display x-axis ticks in datetime format
+    plt.xticks(ticks=[x[t] for t in range(120, len(x), 120)], labels=[(origin + datetime.timedelta(minutes=x[t])).strftime("%d %b %H:%M") for t in range(120, len(x), 120)])  # Display x-axis ticks in day, month, and hour format
     plt.gcf().autofmt_xdate()
+    
     plt.show()
 
-plot_regression_model(polynomial_model)
+plot_regression_model(qudratic_model)
 
 
 def visulise_tempreture():
@@ -178,6 +193,47 @@ def visulise_tempreture():
     plt.show()
 
 # visulise_tempreture()
+
+def visulise_humidity():
+    plt.style.use('ggplot')
+
+    fig = plt.figure(figsize=(10, 5))
+    grid = plt.GridSpec(3, 4, figure=fig)
+    ax1 = fig.add_subplot(grid[0:3, 0:3])
+    ax1.set_xlim(time[0], time[-1])
+    ax1.set_ylim(0, 60)  # Set ylim to 0-60
+    plt.gcf().autofmt_xdate()
+    plt.ylabel("Humidity (%)")
+    plt.xlabel("Time")
+    plt.title("Humidity in the room")
+    ax1.plot(time, mean_hum, label="avg", color='blue')
+    ax2 = fig.add_subplot(grid[0, 3])
+    ax2.set_xlim(time[0], time[-1])
+    ax2.set_ylim(0, 60)  # Set ylim to 0-60
+    ax2.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gcf().autofmt_xdate()
+    ax2.plot(time, sensors_data["s1h"], label="s1h", color='red')
+    ax3 = fig.add_subplot(grid[1, 3])
+    ax3.set_xlim(time[0], time[-1])
+    ax3.set_ylim(0, 60)  # Set ylim to 0-60
+    ax3.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gcf().autofmt_xdate()
+    ax3.plot(time, sensors_data["s2h"], label="s2h", color='green')
+    ax4 = fig.add_subplot(grid[2, 3])
+    ax4.set_xlim(time[0], time[-1])
+    ax4.set_ylim(0, 60)  # Set ylim to 0-60
+    ax4.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gcf().autofmt_xdate()
+    ax4.plot(time, sensors_data["s3h"], label="s3h", color='orange')
+    
+    ax1.legend()
+    ax2.legend()
+    ax3.legend()
+    ax4.legend()
+    
+    plt.show()
+
+# visulise_humidity()
 
 def get_data_from_date(yr, month, day, records):
     """
