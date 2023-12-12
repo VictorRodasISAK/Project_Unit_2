@@ -338,6 +338,14 @@ This graph helped us understand that the humidity in the room is too low for sen
 
 It made clear that the data from those sensors are not reliable and we decided to not use them in the rest of the project. We decided to use only the temperature data from the local sensors and the temperature and humidity data from the remote location.
 
+***Comparison with outdoor sensors:***
+After we got the data for outdoor sensors as described in the previous section, we wanted to compare them with the local sensors. We wanted to see how they differ and if there is any correlation between them. 
+First, we wanted to make sure that the data we got from the outdoor sensors are correct. We decided to graph them and see if they make sense. Here you can see sensors measurements for temperature and humidity for the date 27-20.11.2020:
+![temperature and humidity for outdoor sensors](Project_02_Images/temp_outdoor.png)
+![temperature and humidity for outdoor sensors](Project_02_Images/hum_outdoor.png)
+
+Unfortunately, some of the sensors are either broken or are on the bottom of upper limit of their range. We decided to use only the data from the sensor with id 2 for temperature and sensro with id 5 for humidiry, which are the only one that are working properly.
+
 ### Mathematical Modelling
 To adress the sixth success criteria, we had to create a mathematical model to predict its values for the next 12 hours. We were not sure whitch model to use, so we decided to create a function that allows us to easily compare different models and choose the best one.
 It looks like this:
