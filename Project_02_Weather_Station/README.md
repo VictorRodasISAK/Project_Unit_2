@@ -148,6 +148,125 @@ and a backup copy will be store in the remote server using the **Weather API**.
 
 
 ## Development
+### Gathering Data
+To adress the first two success criteria, We had gather data from the sensors and save safely. To do this, we decided to save them both to csv files and to a remote server. 
+
+First problem we had to solve was to structure the code as clearly as possible, because of the amount of tasks we had to do. We decided to use functions to make the code more readable and easier to understand.
+
+The first function we created was the ```do_measurement``` function. This is the main function of the code, and it is the one that is called by the cron job. It call other functions to get the data from the sensors, save it to csv files and send it to the remote server.
+```python
+def do_measurement(s1t, s2t, s3t, s1h, s2h, s3h):
+    d1, d2, d3 = read_ardruino()
+    save_localy(data=d1, file_name="Path to file for the data to be saved")
+    save_localy(data=d2, file_name="Path to file for the data to be saved")
+    save_localy(data=d3, file_name="Path to file for the data to be saved")
+
+    new_record(d1[1], sensor_id=s1t)
+    new_record(d1[0], sensor_id=s1h)
+    new_record(d2[1], sensor_id=s2t)
+    new_record(d2[0], sensor_id=s2h)
+    new_record(d3[1], sensor_id=s3t)
+    new_record(d3[0], sensor_id=s3h)
+```
+This function calls at first the ```read_arduino``` function, which is the one that gets the data from the sensors. 
+
+Here we had to adress the second problem we had, which was to get the data from the sensors in a way that we could save it to the csv files and send it to the remote server. It was necessary to keep in mind the code uploaded to the arduino, so we had to get the data in a way that we could separate it later. 
+
+We decided to get the data in a string, and then separate it by commas. This way we could save the data to the csv files and send it to the remote server.
+
+For simplicity, we decided to operate with data around the code as three lists of two elements each. The first element of each list is the humidity, and the second element is the temperature of the same sensor. 
+The ```read_arduino``` function is the following:
+```python
+def read_ardruino():
+    arduino = serial.Serial(port="port of arduino", baudrate=9600, timeout=0.1)
+    d1 = ""
+    while len(d1) < 1:
+        d1 = arduino.readline()
+    d2 = ""
+    while len(d2) < 1:
+        d2 = arduino.readline()
+    d3 = ""
+    while len(d3) < 1:
+        d3 = arduino.readline()
+    d1 = d1.decode("utf-8")
+    d2 = d2.decode("utf-8")
+    d3 = d3.decode("utf-8")
+
+    d1 = d1.strip("\r\n").split(",")
+    d2 = d2.strip("\r\n").split(",")
+    d3 = d3.strip("\r\n").split(",")
+    return d1, d2, d3
+```
+To adress the third and final problem we had in the gathering data part, we had to find a way how to efficiently save the data both to csv files and to the remote server so it can be accessed easily later.
+
+We decided to choose different apporaches in both of those cases. For the csv files, we decided to save data into three different files, one for each sensor. This way we could easily access the data later, and it was easier to work with it. We also decided to save the data in a way that it could be easily read by a human, so we decided to save it in a way that the first line of the file is the humidity, and the second line is the temperature. This is more readable every single record on different lines. 
+The ```save_localy``` which handles that is the following:
+```python
+def save_localy(data, file_name = "Project_02_CSV_Files.csv"):
+    with open(file_name, "r") as f:
+        humidity = f.readline().strip("\n")
+        temperature = f.readline().strip("\n")
+    h, t = data
+    humidity = humidity + "," + h
+    temperature = temperature + "," + t
+    with open(file_name, "w") as f:
+        f.writelines(humidity)
+        f.writelines("\n")
+        f.writelines(temperature)
+```
+For the remote server, we decided to create 6 different endpoints, one for each sensor's temperature and humidy separate. This way we could easily access the data later, and it was easier to work with it.
+
+Server also saves datetime of every record we send to it, which is useful for the analysis part and to make sure that the data is correct.
+
+The ```new_record``` function which handles that is the following:
+```python
+def new_record(value, sensor_id, ip = "192.168.6.153"):
+    headers = login_to_server()
+    record = {"sensor_id": sensor_id, "value": value}
+    ans = requests.post(f"http://{ip}/reading/new", json=record, headers=headers)
+```
+You can also notice that it is using the ```login_to_server``` function, which is the one that handles the authentication to the server. This is necessary to be able to send data to the server but won't be explained here because it is not relevant to the gathering data part.
+
+Another thing to notice is that the ```new_record``` function is sending the data to the endpoint ```/reading/new```, which is the one that handles the creation of new records and takes as an argument the sensor id and the value of the record. There is another function that handles the creation of new sensors, which is the ```new_sensor``` function and has to be run before starting the cron job 6 times, one for each sensor's temperature and humidty. This function will also not be explained here to the details.
+### Graphing Data
+There are two major aspects to the graphing data part of the project. The first one is to get the data from the csv files and/or the remote server, and the second one is to graph them in different ways. 
+
+**Getting the data:**
+To adress the third and fourth success criteria, we had to get the data both from local sensors and from remote location. For simplicity, we decided to get both of them in the same way, so we can easily work with them later therefore we got both of them from the remote server. 
+
+Because of different endpoints the data are stored in on the server, we had to get them in different ways. For the local sensors, we had to get the data from the endpoint ```/user/readings```, which takes as an argument the sensor id and it is necessary to authenticate using already mentioned function ```login_to_server```. For the remote location, we had to get the data from the endpoint ```/reading```, which takes no arguments.
+
+Here we had to adress the first problem we had, which was to filter the data we get from the server from different outdoor sensor from different times. Unfortunately, there are no records from the outdoor sensors in the same time as the local sensors, so we decided to choose the ones from the date 20-21.11. On 2.12. when we did the measurement for local sensors the weather was 7 degrees during day and 1 degree at night wich is by far the most similar to the date we chose from our options 17-21-11 and 7.12. onwards.
+
+Here is a function ```get_server_sensor``` which gets sensor with specific sensor and function ```get_data_from_date``` which filters only ones from chosen date:
+```python
+def get_server_sensor(id, ip = "192.168.6.153"):
+    ans = requests.get(f"http://{ip}/readings")
+    data = ans.json()
+
+    sensors = data["readings"][0]
+    sensor = []
+    for s in sensors:
+        if s["sensor_id"] == id:
+            sensor.append(s)
+    return sensor
+    
+def get_data_from_date(yr, month, day, sensor):
+    date = datetime.datetime(yr, month, day).date()
+    data = []
+    datetimes = []
+    for r in sensor:
+        d = r["datetime"]
+        datetime_object = datetime.datetime.strptime(d, '%Y-%m-%dT%H:%M:%S.%f')
+        if datetime_object.date() == date:
+            data.append(r)
+            datetimes.append(datetime_object)
+    return data, datetimes
+```
+You can notice that we used datetime library to handle the date comparison. That solves the problem of different formating of dates and for human hard to read format used by server and allows easier graphing later.
+
+***Visualisation of data:***
+
 
 
 # Criteria D: Functionality

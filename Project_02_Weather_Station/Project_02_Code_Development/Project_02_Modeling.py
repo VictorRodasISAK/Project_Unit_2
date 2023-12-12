@@ -12,6 +12,8 @@ sensors_data = {}
 for s in sensors_id:
     sensors_data[s] = [float(x) for x in get_my_sensor(sensors_id[s])]
 
+print("got my data")
+
 # get the time
 time_in_min = [x*5 for x in range(len(sensors_data["s1t"]))]
 origin = datetime.datetime(2023, 12, 2, 14, 0)
@@ -19,6 +21,7 @@ time = []
 for t in time_in_min:
     time.append(origin + datetime.timedelta(minutes=t))
 
+print("got time")
 
 # get mean values for temperature and humidity
 mean_temp = []
@@ -143,7 +146,7 @@ def plot_regression_model(model):
     plt.gcf().autofmt_xdate()
     plt.show()
 
-# plot_regression_model(polynomial_model)
+plot_regression_model(polynomial_model)
 
 
 def visulise_tempreture():
@@ -254,7 +257,5 @@ def plot_outdoor_temp(yr, month, day1, day2):
     plt.gcf().autofmt_xdate()
     ax4.plot(time, y3, label="s3t", color='orange')
     plt.show()
-    
-    
-        
-plot_outdoor_temp(2023, 11, 19, 20)
+           
+# plot_outdoor_temp(2023, 11, 19, 20)
