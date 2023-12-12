@@ -101,27 +101,59 @@ request to the API of the server at ```192.168.6.153/readings```. The local valu
 and a backup copy will be store in the remote server using the **Weather API**. 
 
 ## Flow Diagrams
+![Flow_Chart_Read_Arduino.png](Project_02_Images%2FFlow_Chart_Read_Arduino.png)
+
+
+**Fig.3** *read_arduino function* Used to take the data from the arduino
+
+
+![Flow_Chart_Login_To_Server.png](Project_02_Images%2FFlow_Chart_Login_To_Server.png)
+
+
+**Fig.4** *login_to_server function* Used to get the access to the server
+
+
+![Flow_Chart_Save_Localy.png](Project_02_Images%2FFlow_Chart_Save_Localy.png)
+
+
+**Fig.5** *save_localy function* Used to save the data in the CSV files
+
+
+![Flow_Chart_New_Record.png](Project_02_Images%2FFlow_Chart_New_Record.png)
+
+
+**Fig.6** *new_record function* Used to upload the data recorded, with help of the function 'login_to_server', mentioned previously. This to get the access to the server
+
+
+![Flow_Chart_Do_Measurement.png](Project_02_Images%2FFlow_Chart_Do_Measurement.png)
+
+
+**Fig.7** *do_measurement funtion* Used to record the data and save it in the CSV files and send the information to the server, with help of the functions 'read_arduino', 'save_locally' and 'new_record', mentioned previously.
 
 
 ## Record Of Tasks
-| Task No. | Planned Action                                               | Planned Outcome                                              | Time estimate | Target completion date | Criteria |
-| -------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------- | ---------------------- | -------- |
-| 1        | Take information from Dr. Ruben's GitHub                     | To have the proposed solution, success criteria and the system diagram | 15 min        | Nov 25                 | A, B     |
-| 2        | Working on the problem definition and design statement       | To have a general view on what do we need to work on         | 30 min        | Nov 26                 | A        |
-| 3        | Making a shared repository on GitHub                         | To have all the information updated                          | 10 min        | Nov 27                 | B        |
-| 4        | Working on the code for 1 sensor                             | To make sure that the sensors are working in a good way      | 30 min        | Nov 28                 | C        |
-| 5        | Working on the functions for the code                        | To have every function in one python code, therefore the main code is going to be more clear | 3 hours       | Nov 29                 | C        |
-| 6        | Working on the code for 3 sensors                            | To make sure that we can get the data in a clear way         | 1 hour        | Nov 30                 | C        |
-| 7        | Making the connections between sensors                       | To have the idea of the connections that we need to make and get the results expected | 45 min        | Nov 30                 | C        |
-| 8        | Setting the sensors in the room                              | To get the data from 3 different points in the room to get conclusions from the room | 30 min        | Dec 1                  | C, B     |
-| 9        | Using cron to set the action to run the code every 5 minutes | To have efficiency when collecting data                      | 1 hour        | Dec 2                  | C        |
-| 10       | Activating cron                                              | To start collecting the data for 48 hours                    | 15 min        | Dec 2                  | C        |
-| 11       | Working on the code for the graphs                           | Once finished the time to collect data, to start graphing the data | 3 hour        | Dec 3                  | C        |
-| 12       | Analyzing the data from the sensors                          | To verify if the information recorded is good                | 20 min        | Dec 4                  | C        |
-| 13       | Working on the graphs                                        | With the data recorded, we started making the graphs to show the data | 2 hours       | Dec 5                  | C        |
-| 14       | Working on the flow diagrams                                 | To have a clear view of how the code works                   | 1 hour        | Dec 6                  | B        |
-| 15       | Working on the flow diagrams                                 | To have an overview of the functions in the code             | 1 hour        | Dec 7                  | B        |
-| 16       | Working on the graphs                                        | To get data from the server of the outdoor sensors to graph them | 1 Hour        | Dec 10                 | C        |
+| Task No. | Planned Action                                               | Planned Outcome                                                                                 | Time estimate | Target completion date | Criteria |
+|----------|--------------------------------------------------------------|-------------------------------------------------------------------------------------------------|---------------|------------------------|----------|
+| 1        | Take information from Dr. Ruben's GitHub                     | To have the proposed solution, success criteria and the system diagram                          | 15 min        | Nov 25                 | A, B     |
+| 2        | Working on the problem definition and design statement       | To have a general view on what do we need to work on                                            | 30 min        | Nov 26                 | A        |
+| 3        | Making a shared repository on GitHub                         | To have all the information updated                                                             | 10 min        | Nov 27                 | B        |
+| 4        | Working on the code for 1 sensor                             | To make sure that the sensors are working in a good way                                         | 30 min        | Nov 28                 | C        |
+| 5        | Working on the functions for the code                        | To have every function in one python code, therefore the main code is going to be more clear    | 3 hours       | Nov 29                 | C        |
+| 6        | Working on the code for 3 sensors                            | To make sure that we can get the data in a clear way                                            | 1 hour        | Nov 30                 | C        |
+| 7        | Making the connections between sensors                       | To have the idea of the connections that we need to make and get the results expected           | 45 min        | Nov 30                 | C        |
+| 8        | Setting the sensors in the room                              | To get the data from 3 different points in the room to get conclusions from the room            | 30 min        | Dec 1                  | C, B     |
+| 9        | Using cron to set the action to run the code every 5 minutes | To have efficiency when collecting data                                                         | 1 hour        | Dec 2                  | C        |
+| 10       | Activating cron                                              | To start collecting the data for 48 hours                                                       | 15 min        | Dec 2                  | C        |
+| 11       | Working on the code for the graphs                           | Once finished the time to collect data, to start graphing the data                              | 3 hour        | Dec 3                  | C        |
+| 12       | Analyzing the data from the sensors                          | To verify if the information recorded is good                                                   | 20 min        | Dec 4                  | C        |
+| 13       | Working on the graphs                                        | With the data recorded, we started making the graphs to show the data                           | 2 hours       | Dec 5                  | C        |
+| 14       | Working on the flow diagrams                                 | To have a clear view of how the code works                                                      | 1 hour        | Dec 6                  | B        |
+| 15       | Working on the flow diagrams                                 | To have an overview of the functions in the code                                                | 1 hour        | Dec 7                  | B        |
+| 16       | Working on the documentation                                 | To have the record of our project                                                               | 1 hour        | Dec 8                  | A, B     |
+| 17       | Upgrading the graphs                                         | To have a better view of the graphs, therefore the it shows proper data that can be read easily | 2 hours       | Dec 9                  | C        |
+| 18       | Designing the poster                                         | To know which type of graphs and information do we need for the poster                          | 30 min        | Dec 10                 | B        |
+| 19       | Video outline                                                | To know which information do we need to include on the video                                    | 20 min        | Dec 11                 | B        |
+| 20       | Working on the documentation                                 | To have the complete track of our project                                                       | 1 hour        | Dec 12                 | A, B     |
 
 ## Test Plan
 
@@ -136,16 +168,38 @@ and a backup copy will be store in the remote server using the **Weather API**.
 | 7        | Testing if the code works properly, together with cron                  | By activating the cron setting, watching if it works for the next 20 min                                     | Getting the data as expected, separated by ','                                                | Dec 02 |
 | 8        | Testing the code for the graphs                                         | With the data collected to the moment, measuring if the functions for the graphs work                        | Getting a proper graph showing humidity and temperature                                       | Dec 03 |
 | 9        | Testing the code for the graphs                                         | With the final results of the data collected, measuring if the code works without problems                   | Getting the graph of all the values recorded of humidity and temperature                      | Dec 05 |
-
+| 10       | Testing the upgrade for the graphs                                      | With the baseline of the code for the graphs we can add more stuff                                           | Having the data presented in a better way                                                     | Dec 09 |
 
 # Criteria C: Development
 
 
 ## Existing Tools
+| Software/Development Tool |
+|---------------------------|
+| Python (PyCharm)          |
+| VS Code                   |
+| Terminal                  |
+| Crontab                   |
 
+| Libraries |
+|-----------|
+| datetime  |
+| request   |
+| serial    |
+| time      |
+| matplotib |
+| numpy     |
 
 ## List Of Techniques Used
 
+1. Functions (To have control of every action and not repeating the same for different parts of the code)
+2. While Loops (To make sure that the sensor was recording data)
+3. If else conditions (To send the data to the correct csv file and to the correct sensor in the server)
+4. Dictionaries (To have a data interchange with key-value pairs)
+5. HTTP Requests (To get the data of the sensors from the server)
+6. Token authentication (To have access to the server and upload information)
+7. Graph plotting (To have the data in a visual way)
+8. Cron tasks (To make an automation for running the code)
 
 ## Development
 ### Gathering Data
@@ -229,6 +283,8 @@ You can also notice that it is using the ```login_to_server``` function, which i
 
 Another thing to notice is that the ```new_record``` function is sending the data to the endpoint ```/reading/new```, which is the one that handles the creation of new records and takes as an argument the sensor id and the value of the record. There is another function that handles the creation of new sensors, which is the ```new_sensor``` function and has to be run before starting the cron job 6 times, one for each sensor's temperature and humidty. This function will also not be explained here to the details.
 ### Graphing Data
+
+
 There are two major aspects to the graphing data part of the project. The first one is to get the data from the csv files and/or the remote server, and the second one is to graph them in different ways. 
 
 **Getting the data:**
@@ -285,7 +341,10 @@ def plot_avg_temp_with_error(min_temp: list, max_temp: list, mean_temp: list, st
     plt.show()
 ```
 Here is graph created by this function:
+
+
 ![temperature with error bars](Project_02_Images/temperature_with_error_bars.png)
+
 
 When we were trying to do the same for the humidity, we realised that the data we got from the sensors were not correct. We were getting values jumping from 20 to 35 sometimes to 40 and back. We wanted to understand the reason for that, so we decided to graph the data we got from the sensors without any changes for all three sensors. We thought that maybe one of the sensors is broken and we wanted to find out which one.
 So we created a function ```visualise_humidity``` which graphs all three sensors and average humidity with the same y-axis. The code is the following:  
@@ -332,7 +391,10 @@ def visulise_humidity():
 You can notice a lot of formatings of the graph, which are there to make the graph easier to read. Those small details such as rotation of dates on x-axis, setting the number of xticks, setting the same y-axis for all graphs, setting the same xlim and ylim for all graphs are crutial when it comes to reading the graph and understanding the data.
 
 Here is the graph created by this function:
+
+
 ![visualisation of idnoor humidity sensors](Project_02_Images/humidity_for_all_sen.png)
+
 
 This graph helped us understand that the humidity in the room is too low for sensors to measure. They all jump up and down from 20 degrees which is the minimum humidity they can measure. This is the reason why we were getting incorrect data from the sensors. It showed us that our original hypothesis with broken sensor was wrong.
 
@@ -341,8 +403,13 @@ It made clear that the data from those sensors are not reliable and we decided t
 ***Comparison with outdoor sensors:***
 After we got the data for outdoor sensors as described in the previous section, we wanted to compare them with the local sensors. We wanted to see how they differ and if there is any correlation between them. 
 First, we wanted to make sure that the data we got from the outdoor sensors are correct. We decided to graph them and see if they make sense. Here you can see sensors measurements for temperature and humidity for the date 27-20.11.2020:
+
+
 ![temperature and humidity for outdoor sensors](Project_02_Images/temp_outdoor.png)
+
+
 ![temperature and humidity for outdoor sensors](Project_02_Images/hum_outdoor.png)
+
 
 Unfortunately, some of the sensors are either broken or are on the bottom of upper limit of their range. We decided to use only the data from the sensor with id 2 for temperature and sensro with id 5 for humidiry, which are the only one that are working properly.
 
@@ -386,13 +453,22 @@ def plot_regression_model(model):
 It takes as an argument the model we want to use. It fits the model to the data we got from the sensors and graphs it together with the data. It also sets the xticks to be every 2 hours, so it is easier to read the graph. It shows the extra 12 hours, so we can see the prediction of the model.
 
 Here is an example of this function with Polynomial Regression model of degree 3:
+
+
 ![polynomial regression model](Project_02_Images/polynomial_regression_model.png)
 
+
 If we run the same function with Linear Regression model, we get the following graph:
+
+
 ![linear regression model](Project_02_Images/linear_regression_model.png)
 
+
 Quadratic Regression model is the following:
+
+
 ![quadratic regression model](Project_02_Images/quadratic_regression_model.png)
+
 
 
 
