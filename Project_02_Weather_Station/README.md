@@ -236,7 +236,7 @@ To adress the third and fourth success criteria, we had to get the data both fro
 
 Because of different endpoints the data are stored in on the server, we had to get them in different ways. For the local sensors, we had to get the data from the endpoint ```/user/readings```, which takes as an argument the sensor id and it is necessary to authenticate using already mentioned function ```login_to_server```. For the remote location, we had to get the data from the endpoint ```/reading```, which takes no arguments.
 
-Here we had to adress the first problem we had, which was to filter the data we get from the server from different outdoor sensor from different times. Unfortunately, there are no records from the outdoor sensors in the same time as the local sensors, so we decided to choose the ones from the date 20-21.11. On 2.12. when we did the measurement for local sensors the weather was 7 degrees during day and 1 degree at night wich is by far the most similar to the date we chose from our options 17-21-11 and 7.12. onwards.
+Here we had to adress the first problem we had, which was to filter the data we get from the server from different outdoor sensor from different times. Unfortunately, there are no records from the outdoor sensors in the same time as the local sensors, so we decided to choose the ones from the date 17-19.11. On 2.12., when we did the measurement for local sensors the weather was 7 degrees during day and 1 degree at night wich is by far the most similar to the date we chose from our options which were 17-21-11 and 7.12. onwards.
 
 Here is a function ```get_server_sensor``` which gets sensor with specific sensor and function ```get_data_from_date``` which filters only ones from chosen date:
 ```python
@@ -345,6 +345,9 @@ First, we wanted to make sure that the data we got from the outdoor sensors are 
 ![temperature and humidity for outdoor sensors](Project_02_Images/hum_outdoor.png)
 
 Unfortunately, some of the sensors are either broken or are on the bottom of upper limit of their range. We decided to use only the data from the sensor with id 2 for temperature and sensro with id 5 for humidiry, which are the only one that are working properly.
+
+Here is a graph of comparison from local sensors and outdoor sensor:
+![comparison from local and outdoor sensors](Project_02_Images/Comparison_out_in.png)
 
 ### Mathematical Modelling
 To adress the sixth success criteria, we had to create a mathematical model to predict its values for the next 12 hours. We were not sure whitch model to use, so we decided to create a function that allows us to easily compare different models and choose the best one.

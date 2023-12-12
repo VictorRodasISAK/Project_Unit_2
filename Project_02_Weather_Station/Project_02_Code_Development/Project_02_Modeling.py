@@ -161,7 +161,7 @@ def plot_regression_model(model):
     
     plt.show()
 
-plot_regression_model(qudratic_model)
+# plot_regression_model(qudratic_model)
 
 
 def visulise_tempreture():
@@ -251,6 +251,22 @@ def get_data_from_date(yr, month, day, records):
             data.append(r)
     return data
 
+def get_data_from_date_and_time(yr, month, day, records, hourStart, hourEnd):
+    """
+    because in 2.12. the weather was 7 degrees in a day and 1 degree in a night
+    we use data from 20.11 where the weather was 8 degree in a day and 2 degree in a night
+    wich is by far the most similar to the 2.12. data from our options from 17.11. to 21.11. and 7.12. onwards
+    """
+    date = datetime.datetime(yr, month, day).date()
+    data = []
+    for r in records:
+        d = r["datetime"]
+        datetime_object = datetime.datetime.strptime(d, '%Y-%m-%dT%H:%M:%S.%f')
+        if datetime_object.date() == date:
+            if datetime_object.hour >= hourStart and datetime_object.hour <= hourEnd:
+                data.append(r)
+    return data
+
 def plot_outdoor_temp(yr, month, day1, day2):
     """
     takes temp from two days form server ids 0, 2, 4
@@ -315,3 +331,40 @@ def plot_outdoor_temp(yr, month, day1, day2):
     plt.show()
            
 # plot_outdoor_temp(2023, 11, 19, 20)
+
+def compare_and_plot(y, m, d1,d2):
+    out_temp = get_server_sensor(2)[178:len(mean_temp)+178]
+    # out_temp = get_data_from_date_and_time(y, m, d1-1, out_temp, 12, 24)
+    # out_temp += get_data_from_date(y, m, d1, out_temp)
+    # out_temp += get_data_from_date_and_time(y, m, d2, out_temp, 0, 12)
+
+    out_hum = get_server_sensor(5)[178:len(mean_hum)+178]
+    # out_hum = get_data_from_date_and_time(y, m, d1-1, out_hum, 12, 24)
+    # out_hum += get_data_from_date(y, m, d1, out_hum)
+    # out_hum += get_data_from_date_and_time(y, m, d2, out_hum, 0, 12)
+    print(out_temp[0]["datetime"], out_temp[-1]["datetime"])
+    print(out_hum[0]["datetime"], out_hum[-1]["datetime"])
+
+    plt.style.use('ggplot')
+    plt.subplot(2, 1, 1)
+    plt.plot(time, mean_temp, label="inside")
+    plt.plot(time, [x["value"] for x in out_temp], label="outside")
+    # plt.plot([x["datetime"] for x in out_temp], [x["value"] for x in out_temp], label="outside")
+    plt.ylabel("Temperature (C)")
+    plt.xlabel("Time")
+    plt.title("Comparison of indoor and outdoor temperature")
+    plt.legend()
+    plt.xlim(time[0], time[-1])
+    plt.gcf().autofmt_xdate()
+    plt.subplot(2, 1, 2)
+    plt.plot(time, mean_hum, label="inside")
+    plt.plot(time, [x["value"] for x in out_hum], label="outside")
+    plt.xlabel("Time")
+    plt.ylabel("Humidity (%)")
+    plt.title("Comparison of indoor and outdoor humidity")
+    plt.legend()
+    plt.xlim(time[0], time[-1])
+    plt.gcf().autofmt_xdate()
+    plt.show()
+
+compare_and_plot(2023, 12, 9, 10)
