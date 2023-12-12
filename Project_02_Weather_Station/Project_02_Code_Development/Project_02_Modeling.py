@@ -3,6 +3,7 @@ import numpy as np
 from Project_02_Library import *
 import datetime
 from scipy.optimize import curve_fit
+import matplotlib.dates as mdates
 
 # Initialize the sensors
 sensors_id = {"s1t": 40, "s2t": 41, "s3t": 42, "s1h": 43, "s2h": 44, "s3h": 45}
@@ -63,22 +64,42 @@ for s in range(len(sensors_data["s1h"])):
 
 # plot the data
 def plot_avg_temp_hum():
+    plt.style.use('ggplot')
     plt.subplot(2, 1, 1)
     # plt.errorbar(time, mean_temp, yerr=std_temp, fmt='o', ecolor='green', capsize=3)
-    plt.plot(time, mean_temp, label="avg")
+    plt.plot(time, mean_temp, label="avg", color="black")
     # plt.fill_between(time, min_temp, max_temp, alpha= 0.2, label="min/max")
     plt.ylabel("Temperature (C)")   
     plt.xlabel("Time")
     plt.title("Temperature and Humidity in the room")
+    maximum = np.max(mean_temp)
+    minimum = np.min(mean_temp)
+    health = 23
+    plt.plot(time, [maximum for x in time], label="max", linestyle='dashed', color='red')
+    plt.plot(time, [minimum for x in time], label="min", linestyle='dashed', color='blue')
+    plt.plot(time, [health for x in time], label="ideal state", linestyle='dashed', color='green')
+    plt.legend()
+    plt.xlim(time[0], time[-1])
+
     plt.subplot(2, 1, 2)
     # plt.errorbar(time, mean_hum, yerr=std_hum, fmt='o', ecolor='green', capsize=3)
-    plt.plot(time, mean_hum, label="avg")
+    plt.plot(time, mean_hum, label="avg", color="black")
     plt.ylabel("Humidity (%)")
     plt.xlabel("Time")
 
+    maximum = np.max(mean_hum)
+    minimum = np.min(mean_hum)
+    health = 45
+    plt.plot(time, [maximum for x in time], label="max", linestyle='dashed', color='red')
+    plt.plot(time, [minimum for x in time], label="min", linestyle='dashed', color='blue')
+    plt.plot(time, [health for x in time], label="ideal state", linestyle='dashed', color='green')
+    plt.legend()
+
     plt.xlim(time[0], time[-1])
     plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
     plt.show()
+
 # plot_avg_temp_hum()
 
 # plot humidity sensor data
@@ -102,6 +123,7 @@ def get_indoor_humidity_data():
 
 # New function to plot average temperature with error bars every 30 data points and minimum and maximum
 def plot_avg_temp_with_error():
+    plt.style.use('ggplot')
     plt.errorbar(time[::30], mean_temp[::30], yerr=std_temp[::30], fmt='o', ecolor='green', capsize=3, label="std")
     plt.fill_between(time, min_temp, max_temp, alpha=0.2, label="min/max")
     plt.plot(time, mean_temp, label="avg")
@@ -112,9 +134,27 @@ def plot_avg_temp_with_error():
     plt.legend()
     plt.xlim(time[0], time[-1])
     plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
     plt.show()
 
 # plot_avg_temp_with_error()
+
+def plot_avg_hum_with_error():
+    plt.style.use('ggplot')
+    plt.errorbar(time[::30], mean_hum[::30], yerr=std_hum[::30], fmt='o', ecolor='green', capsize=3, label="std")
+    plt.fill_between(time, min_hum, max_hum, alpha=0.2, label="min/max")
+    plt.plot(time, mean_hum, label="avg")
+    plt.ylabel("Humidity")
+    plt.xlabel("Time")
+    plt.title("Average Humidity with Error Bars")
+
+    plt.legend()
+    plt.xlim(time[0], time[-1])
+    plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
+    plt.show()
+
+# plot_avg_hum_with_error()
 
 def qudratic_model(x, a, b, c):
     return a*x**2 + b*x + c
@@ -164,35 +204,50 @@ def plot_regression_model(model):
 # plot_regression_model(qudratic_model)
 
 
-def visulise_tempreture():
+def visulise_temperature():
     plt.style.use('ggplot')
 
     fig = plt.figure(figsize=(10, 5))
     grid = plt.GridSpec(3, 4, figure=fig)
     ax1 = fig.add_subplot(grid[0:3, 0:3])
     ax1.set_xlim(time[0], time[-1])
+    ax1.set_ylim(20, 30)  # Set ylim to 20-30
     plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
     plt.ylabel("Temperature (C)")
     plt.xlabel("Time")
+    plt.title("Temperature in the room")
     ax1.plot(time, mean_temp, label="avg", color='blue')
     ax2 = fig.add_subplot(grid[0, 3])
     ax2.set_xlim(time[0], time[-1])
+    ax2.set_ylim(20, 30)  # Set ylim to 20-30
     ax2.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
     plt.gcf().autofmt_xdate()
     ax2.plot(time, sensors_data["s1t"], label="s1t", color='red')
     ax3 = fig.add_subplot(grid[1, 3])
     ax3.set_xlim(time[0], time[-1])
+    ax3.set_ylim(20, 30)  # Set ylim to 20-30
     ax3.xaxis.set_major_locator(plt.MaxNLocator(4))
     plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
     ax3.plot(time, sensors_data["s2t"], label="s2t", color='green')
     ax4 = fig.add_subplot(grid[2, 3])
     ax4.set_xlim(time[0], time[-1])
+    ax4.set_ylim(20, 30)  # Set ylim to 20-30
     ax4.xaxis.set_major_locator(plt.MaxNLocator(4))
     plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
     ax4.plot(time, sensors_data["s3t"], label="s3t", color='orange')
+    
+    ax1.legend()
+    ax2.legend()
+    ax3.legend()
+    ax4.legend()
+    
     plt.show()
 
-# visulise_tempreture()
+# visulise_temperature()
 
 def visulise_humidity():
     plt.style.use('ggplot')
@@ -203,6 +258,7 @@ def visulise_humidity():
     ax1.set_xlim(time[0], time[-1])
     ax1.set_ylim(0, 60)  # Set ylim to 0-60
     plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
     plt.ylabel("Humidity (%)")
     plt.xlabel("Time")
     plt.title("Humidity in the room")
@@ -211,6 +267,7 @@ def visulise_humidity():
     ax2.set_xlim(time[0], time[-1])
     ax2.set_ylim(0, 60)  # Set ylim to 0-60
     ax2.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
     plt.gcf().autofmt_xdate()
     ax2.plot(time, sensors_data["s1h"], label="s1h", color='red')
     ax3 = fig.add_subplot(grid[1, 3])
@@ -218,12 +275,14 @@ def visulise_humidity():
     ax3.set_ylim(0, 60)  # Set ylim to 0-60
     ax3.xaxis.set_major_locator(plt.MaxNLocator(4))
     plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
     ax3.plot(time, sensors_data["s2h"], label="s2h", color='green')
     ax4 = fig.add_subplot(grid[2, 3])
     ax4.set_xlim(time[0], time[-1])
     ax4.set_ylim(0, 60)  # Set ylim to 0-60
     ax4.xaxis.set_major_locator(plt.MaxNLocator(4))
     plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
     ax4.plot(time, sensors_data["s3h"], label="s3h", color='orange')
     
     ax1.legend()
@@ -333,12 +392,12 @@ def plot_outdoor_temp(yr, month, day1, day2):
 # plot_outdoor_temp(2023, 11, 19, 20)
 
 def compare_and_plot(y, m, d1,d2):
-    out_temp = get_server_sensor(2)[178:len(mean_temp)+178]
+    out_temp = get_server_sensor(2)[34:len(mean_temp)+34]
     # out_temp = get_data_from_date_and_time(y, m, d1-1, out_temp, 12, 24)
     # out_temp += get_data_from_date(y, m, d1, out_temp)
     # out_temp += get_data_from_date_and_time(y, m, d2, out_temp, 0, 12)
 
-    out_hum = get_server_sensor(5)[178:len(mean_hum)+178]
+    out_hum = get_server_sensor(5)[34:len(mean_hum)+34]
     # out_hum = get_data_from_date_and_time(y, m, d1-1, out_hum, 12, 24)
     # out_hum += get_data_from_date(y, m, d1, out_hum)
     # out_hum += get_data_from_date_and_time(y, m, d2, out_hum, 0, 12)
@@ -350,12 +409,15 @@ def compare_and_plot(y, m, d1,d2):
     plt.plot(time, mean_temp, label="inside")
     plt.plot(time, [x["value"] for x in out_temp], label="outside")
     # plt.plot([x["datetime"] for x in out_temp], [x["value"] for x in out_temp], label="outside")
+
+
     plt.ylabel("Temperature (C)")
     plt.xlabel("Time")
     plt.title("Comparison of indoor and outdoor temperature")
     plt.legend()
     plt.xlim(time[0], time[-1])
     plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
     plt.subplot(2, 1, 2)
     plt.plot(time, mean_hum, label="inside")
     plt.plot(time, [x["value"] for x in out_hum], label="outside")
@@ -365,6 +427,7 @@ def compare_and_plot(y, m, d1,d2):
     plt.legend()
     plt.xlim(time[0], time[-1])
     plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
     plt.show()
 
-compare_and_plot(2023, 12, 9, 10)
+# compare_and_plot(2023, 12, 9, 10)
