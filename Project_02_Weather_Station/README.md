@@ -9,11 +9,11 @@
 
 
 # Criteria A: Planning
-Victor & Jenda are buying a house in Japan, but they are worried about the humidity and temperate inside the house. 
+Victor & Jenda are buying an apartment in Japan, but they are worried about the humidity and temperate inside the apartment. 
 Now the inquiry is even bigger because winter is coming, therefore they want to keep the humidity and temperature
-stable in the house. They started to measure this values, but they notice it takes too much time. For this reason,
+stable in the apartment. They started to measure this values, but they notice it takes too much time. For this reason,
 they want to get a device and a costume data script that is low-cost, and it can measure the humidity and temperature in 
-the house in an efficient way, where the data collected is tidy, and it's easy to get a clear idea of what the house need.
+the apartment in an efficient way, where the data collected is tidy, and it's easy to get a clear idea of what the apartment need.
 Moreover, if possible they are asking for a pre-visualization of temperature and humidity for the next 12 hours, so they
 can set up possible actions beforehand to keep this values in the best way possible.
 
@@ -67,7 +67,7 @@ developers extend the solution or solve issues promptly.
 
 ### Design Statement
 We will design and make a poster for Victor & Jenda.
-The poster will include the system diagram and visual representation and model of humidity in the house for 48 hours,
+The poster will include the system diagram and visual representation and model of humidity in the apartment for 48 hours,
 and a prediction for the next 12 hours. It will present the ideal objects that they need to buy to keep the temperature
 and humidity levels suitable to live in. This is achieved through with the software Python on an Arduino Uno, 
 with three DHT11 sensors. It will take approximately 3 weeks to complete and will be evaluated according to criteria below
@@ -104,31 +104,31 @@ and a backup copy will be store in the remote server using the **Weather API**.
 ![Flow_Chart_Read_Arduino.png](Project_02_Images%2FFlow_Chart_Read_Arduino.png)
 
 
-**Fig.3** *read_arduino function* Used to take the data from the arduino
+**Fig.3** *read_arduino function. Used to take the data from the arduino*
 
 
 ![Flow_Chart_Login_To_Server.png](Project_02_Images%2FFlow_Chart_Login_To_Server.png)
 
 
-**Fig.4** *login_to_server function* Used to get the access to the server
+**Fig.4** *login_to_server function. Used to get the access to the server*
 
 
 ![Flow_Chart_Save_Localy.png](Project_02_Images%2FFlow_Chart_Save_Localy.png)
 
 
-**Fig.5** *save_localy function* Used to save the data in the CSV files
+**Fig.5** *save_localy function. Used to save the data in the CSV files*
 
 
 ![Flow_Chart_New_Record.png](Project_02_Images%2FFlow_Chart_New_Record.png)
 
 
-**Fig.6** *new_record function* Used to upload the data recorded, with help of the function 'login_to_server', mentioned previously. This to get the access to the server
+**Fig.6** *new_record function. Used to upload the data recorded, with help of the function 'login_to_server', mentioned previously. This to get the access to the server*
 
 
 ![Flow_Chart_Do_Measurement.png](Project_02_Images%2FFlow_Chart_Do_Measurement.png)
 
 
-**Fig.7** *do_measurement funtion* Used to record the data and save it in the CSV files and send the information to the server, with help of the functions 'read_arduino', 'save_locally' and 'new_record', mentioned previously.
+**Fig.7** *do_measurement funtion. Used to record the data and save it in the CSV files and send the information to the server, with help of the functions 'read_arduino', 'save_locally' and 'new_record', mentioned previously.*
 
 
 ## Record Of Tasks
@@ -181,14 +181,14 @@ and a backup copy will be store in the remote server using the **Weather API**.
 | Terminal                  |
 | Crontab                   |
 
-| Libraries |
-|-----------|
-| datetime  |
-| request   |
-| serial    |
-| time      |
-| matplotib |
-| numpy     |
+| Libraries  |
+|------------|
+| datetime   |
+| request    |
+| serial     |
+| time       |
+| matplotlib |
+| numpy      |
 
 ## List Of Techniques Used
 
@@ -346,6 +346,9 @@ Here is graph created by this function:
 ![temperature with error bars](Project_02_Images/temperature_with_error_bars.png)
 
 
+**Fig.8** *Example of the graph returned by the function*
+
+
 When we were trying to do the same for the humidity, we realised that the data we got from the sensors were not correct. We were getting values jumping from 20 to 35 sometimes to 40 and back. We wanted to understand the reason for that, so we decided to graph the data we got from the sensors without any changes for all three sensors. We thought that maybe one of the sensors is broken and we wanted to find out which one.
 So we created a function ```visualise_humidity``` which graphs all three sensors and average humidity with the same y-axis. The code is the following:  
 ```python
@@ -396,6 +399,9 @@ Here is the graph created by this function:
 ![visualisation of idnoor humidity sensors](Project_02_Images/humidity_for_all_sen.png)
 
 
+**Fig.9** *Example of the graph returned by the function*
+
+
 This graph helped us understand that the humidity in the room is too low for sensors to measure. They all jump up and down from 20 degrees which is the minimum humidity they can measure. This is the reason why we were getting incorrect data from the sensors. It showed us that our original hypothesis with broken sensor was wrong.
 
 It made clear that the data from those sensors are not reliable and we decided to not use them in the rest of the project. We decided to use only the temperature data from the local sensors and the temperature and humidity data from the remote location.
@@ -408,7 +414,13 @@ First, we wanted to make sure that the data we got from the outdoor sensors are 
 ![temperature and humidity for outdoor sensors](Project_02_Images/temp_outdoor.png)
 
 
+**Fig.10** *Graph of the outdoor sensors, showing temperature*
+
+
 ![temperature and humidity for outdoor sensors](Project_02_Images/hum_outdoor.png)
+
+
+**Fig.11** *Graph of the outdoor sensors, showing humidity*
 
 
 Unfortunately, some of the sensors are either broken or are on the bottom of upper limit of their range. We decided to use only the data from the sensor with id 2 for temperature and sensro with id 5 for humidiry, which are the only one that are working properly.
@@ -458,10 +470,15 @@ Here is an example of this function with Polynomial Regression model of degree 3
 ![polynomial regression model](Project_02_Images/polynomial_regression_model.png)
 
 
+**Fig.12** *Graph of the polynomial regression model*
+
+
 If we run the same function with Linear Regression model, we get the following graph:
 
 
 ![linear regression model](Project_02_Images/linear_regression_model.png)
+
+**Fig.13** *Graph of the linear regression model*
 
 
 Quadratic Regression model is the following:
@@ -470,6 +487,7 @@ Quadratic Regression model is the following:
 ![quadratic regression model](Project_02_Images/quadratic_regression_model.png)
 
 
+**Fig.14** *Graph of the quadratic regression model*
 
 
 # Criteria D: Functionality
