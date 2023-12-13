@@ -203,6 +203,37 @@ def plot_regression_model(model):
 
 # plot_regression_model(qudratic_model)
 
+def plot_regression_model_hum(model):
+    plt.style.use('ggplot')
+
+    # Fit the regression model
+    popt, pcov = curve_fit(model, time_in_min, mean_hum)
+
+    # Generate x values for the regression line
+    x = np.linspace(time_in_min[0], time_in_min[-1] + 12*60, 1000)
+
+    # Generate y values using the fitted parameters
+    y = model(x, *popt)
+
+    # Plot the average temperature data
+    plt.plot(time_in_min, mean_hum, label="Average Humidity")
+
+    # Plot the regression model
+    plt.plot(x, y, label="Regression Model")
+
+    plt.ylabel("Humidity (%)")
+    plt.xlabel("Time)")
+    plt.title("Regression Model for Average Humidity")
+    plt.legend()
+
+    plt.xlim(time_in_min[0], time_in_min[-1])
+
+    plt.xticks(ticks=[x[t] for t in range(120, len(x), 120)], labels=[(origin + datetime.timedelta(minutes=x[t])).strftime("%d %b %H:%M") for t in range(120, len(x), 120)])  # Display x-axis ticks in day, month, and hour format
+    plt.gcf().autofmt_xdate()
+    
+    plt.show()
+
+plot_regression_model_hum(qudratic_model)
 
 def visulise_temperature():
     plt.style.use('ggplot')
