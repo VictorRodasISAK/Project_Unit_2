@@ -496,6 +496,9 @@ Quadratic Regression model is the following:
 ## Scientific Poster
 
 
+![Poster Project 2.png](Project_02_Images%2FPoster%20Project%202.png)
+
+
 **Fig.15** *Scientific poster*
 
 
