@@ -503,3 +503,4 @@ Quadratic Regression model is the following:
 
 
 ## Video Link
+[Click here for video link](https://drive.google.com/file/d/1jmW7FtcNP6kCNOgxtESKyn4gfmgesUlO/view?usp=sharing)
