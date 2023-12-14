@@ -233,7 +233,7 @@ def plot_regression_model_hum(model):
     
     plt.show()
 
-plot_regression_model_hum(qudratic_model)
+# plot_regression_model_hum(qudratic_model)
 
 def visulise_temperature():
     plt.style.use('ggplot')
@@ -462,3 +462,52 @@ def compare_and_plot(y, m, d1,d2):
     plt.show()
 
 # compare_and_plot(2023, 12, 9, 10)
+
+def visualise_humidity_smoothed(vin):
+    time, smooth_all = smoothing(mean_hum, vin)
+    time2, smooth_s1 = smoothing(sensors_data["s1h"], vin)
+    time3, smooth_s2 = smoothing(sensors_data["s2h"], vin)
+    time4, smooth_s3 = smoothing(sensors_data["s3h"], vin)
+    plt.style.use('ggplot')
+
+    fig = plt.figure(figsize=(10, 5))
+    grid = plt.GridSpec(3, 4, figure=fig)
+    ax1 = fig.add_subplot(grid[0:3, 0:3])
+    ax1.set_xlim(time[0], time[-1])
+    ax1.set_ylim(0, 60)  # Set ylim to 0-60
+    plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
+    plt.ylabel("Humidity (%)")
+    plt.xlabel("Time")
+    plt.title("Humidity in the room smoothed with window size " + str(vin) + " minutes")
+    ax1.plot(time, smooth_all, label="avg", color='blue')
+    ax2 = fig.add_subplot(grid[0, 3])
+    ax2.set_xlim(time[0], time[-1])
+    ax2.set_ylim(0, 60)  # Set ylim to 0-60
+    ax2.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
+    plt.gcf().autofmt_xdate()
+    ax2.plot(time2, smooth_s1, label="s1h", color='red')
+    ax3 = fig.add_subplot(grid[1, 3])
+    ax3.set_xlim(time[0], time[-1])
+    ax3.set_ylim(0, 60)  # Set ylim to 0-60
+    ax3.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
+    ax3.plot(time3, smooth_s2, label="s2h", color='green')
+    ax4 = fig.add_subplot(grid[2, 3])
+    ax4.set_xlim(time[0], time[-1])
+    ax4.set_ylim(0, 60)  # Set ylim to 0-60
+    ax4.xaxis.set_major_locator(plt.MaxNLocator(4))
+    plt.gcf().autofmt_xdate()
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %d %H:%M'))
+    ax4.plot(time4, smooth_s3, label="s3h", color='orange')
+    
+    ax1.legend()
+    ax2.legend()
+    ax3.legend()
+    ax4.legend()
+    
+    plt.show()
+
+visualise_humidity_smoothed(20)
