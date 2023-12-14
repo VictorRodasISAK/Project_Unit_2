@@ -392,7 +392,7 @@ def visulise_humidity():
     
     plt.show()
 ```
-You can notice a lot of formatings of the graph, which are there to make the graph easier to read. Those small details such as rotation of dates on x-axis, setting the number of xticks, setting the same y-axis for all graphs, setting the same xlim and ylim for all graphs are crutial when it comes to reading the graph and understanding the data.
+You can notice a lot of formatting of the graph, which are there to make the graph easier to read. Those small details such as rotation of dates on x-axis, setting the number of xticks, setting the same y-axis for all graphs, setting the same xlim and ylim for all graphs are crutial when it comes to reading the graph and understanding the data.
 
 Here is the graph created by this function:
 
