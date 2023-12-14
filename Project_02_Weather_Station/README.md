@@ -9,27 +9,26 @@
 
 
 # Criteria A: Planning
+
+
+## Problem Definition
 Victor & Jenda are buying an apartment in Japan, but they are worried about the humidity and temperate inside the apartment. 
-Now the inquiry is even bigger because winter is coming, therefore they want to keep the humidity and temperature
-stable in the apartment. They started to measure this values, but they notice it takes too much time. For this reason,
+Now the inquiry is even bigger because winter is coming, therefore, they want to keep the humidity and temperature
+stable between 20-22 degrees Celsius and 30%-50% of humidity in the apartment. They started to measure this values, but they notice it takes too much time. For this reason,
 they want to get a device and a costume data script that is low-cost, and it can measure the humidity and temperature in 
 the apartment in an efficient way, where the data collected is tidy, and it's easy to get a clear idea of what the apartment need.
 Moreover, if possible they are asking for a pre-visualization of temperature and humidity for the next 12 hours, so they
 can set up possible actions beforehand to keep this values in the best way possible.
 
-
-## Problem Definition
-
-
 ## Proposed Solution
-Considering the client requirements an adequate solution includes a low cost sensing device for humidity and temperature 
+Considering the client requirements, an adequate solution includes a low-cost sensing device for humidity and temperature 
 and a custom data script that process and analysis the samples acquired. For a low cost sensing device an adequate 
 alternative is the DHT11 sensor[^2] which is offered online for less than 5 USD and provides adequate precision and range
 for the client requirements (Temperature Range: 0°C to 50°C, Humidity Range: 20% to 90%). Similar devices such as the 
 DHT22, AHT20 or the AM2301B [^3] have higher specifications, however the DHT11 uses a simple serial communication (SPI) 
 rather than more elaborated protocols such as the I2C used by the alternatives. For the range, precision and accuracy 
 required in this application the DHT11 provides the best compromise. Connecting the DHT11 sensor to a computer requires 
-a device that provides a Serial Port communication. A cheap and often used alternative for prototyping is the Arduino 
+a device that provides a Serial Port communication. An economical and often used alternative for prototyping is the Arduino 
 UNO microcontroller [^4]. "Arduino is an open-source electronics platform based on easy-to-use hardware and software"[^5]. 
 In addition to the low cost of the Arduino (< 6USD), this device is programmable and expandable[^2]. Other alternatives 
 include different versions of the original Arduino but their size and price make them a less adequate solution.
@@ -151,9 +150,11 @@ and a backup copy will be store in the remote server using the **Weather API**.
 | 15       | Working on the flow diagrams                                 | To have an overview of the functions in the code                                                | 1 hour        | Dec 7                  | B        |
 | 16       | Working on the documentation                                 | To have the record of our project                                                               | 1 hour        | Dec 8                  | A, B     |
 | 17       | Upgrading the graphs                                         | To have a better view of the graphs, therefore the it shows proper data that can be read easily | 2 hours       | Dec 9                  | C        |
-| 18       | Designing the poster                                         | To know which type of graphs and information do we need for the poster                          | 30 min        | Dec 10                 | B        |
-| 19       | Video outline                                                | To know which information do we need to include on the video                                    | 20 min        | Dec 11                 | B        |
-| 20       | Working on the documentation                                 | To have the complete track of our project                                                       | 1 hour        | Dec 12                 | A, B     |
+| 18       | Designing the poster                                         | To know which type of graphs and information do we need for the poster                          | 30 min        | Dec 10                 | D        |
+| 19       | Video outline                                                | To know which information do we need to include on the video                                    | 20 min        | Dec 11                 | D        |
+| 20       | Working on the documentation                                 | To have the complete track of our project                                                       | 1 hour        | Dec 12                 | A, B, C  |
+| 21       | Working on the poster                                        | To show all the results that we got in a scientific poster                                      | 4 hours       | Dec 13                 | D        |
+| 22       | Making the video                                             | To present all the data, narrating the poster that we made                                      | 2 hours       | Dec 14                 | D        |
 
 ## Test Plan
 
@@ -251,9 +252,9 @@ def read_ardruino():
     d3 = d3.strip("\r\n").split(",")
     return d1, d2, d3
 ```
-To adress the third and final problem we had in the gathering data part, we had to find a way how to efficiently save the data both to csv files and to the remote server so it can be accessed easily later.
+To address the third and final problem we had in the gathering data part, we had to find a way how to efficiently save the data both to csv files and to the remote server so it can be accessed easily later.
 
-We decided to choose different apporaches in both of those cases. For the csv files, we decided to save data into three different files, one for each sensor. This way we could easily access the data later, and it was easier to work with it. We also decided to save the data in a way that it could be easily read by a human, so we decided to save it in a way that the first line of the file is the humidity, and the second line is the temperature. This is more readable every single record on different lines. 
+We decided to choose different approaches in both of those cases. For the csv files, we decided to save data into three different files, one for each sensor. This way we could easily access the data later, and it was easier to work with it. We also decided to save the data in a way that it could be easily read by a human, so we decided to save it in a way that the first line of the file is the humidity, and the second line is the temperature. This is more readable every single record on different lines. 
 The ```save_localy``` which handles that is the following:
 ```python
 def save_localy(data, file_name = "Project_02_CSV_Files.csv"):
@@ -491,3 +492,14 @@ Quadratic Regression model is the following:
 
 
 # Criteria D: Functionality
+
+## Scientific Poster
+
+
+![Poster Project 2.png](Project_02_Images%2FPoster%20Project%202.png)
+
+
+**Fig.15** *Scientific poster*
+
+
+## Video Link
